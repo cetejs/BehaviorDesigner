@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections;
+using System.Reflection;
+
+namespace BehaviorDesigner.Editor
+{
+    public class SharedQuaternionListField : SharedVariableField<BehaviorListField, SharedQuaternionList, IList>
+    {
+        public SharedQuaternionListField(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
+        {
+            this.fieldInfo = fieldInfo;
+        }
+
+        protected override BehaviorListField CreateEditorField()
+        {
+            Type genericType = fieldInfo.FieldType.BaseType.GetGenericArguments()[0];
+            return new BehaviorListField(window, genericType, fieldInfo.Name);
+        }
+
+        protected override void SetFieldName(string name)
+        {
+        }
+    }
+
+    public class SharedQuaternionListResolver : FieldResolver<SharedQuaternionListField, SharedQuaternionList>
+    {
+        public SharedQuaternionListResolver(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
+        {
+        }
+
+        protected override SharedQuaternionListField CreateEditorField(FieldInfo fieldInfo)
+        {
+            return new SharedQuaternionListField(fieldInfo, window);
+        }
+
+        public static bool IsAcceptable(FieldInfo info)
+        {
+            return info.FieldType == typeof(SharedQuaternionList);
+        }
+    }
+}

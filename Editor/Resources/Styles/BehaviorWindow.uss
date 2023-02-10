@@ -1,0 +1,23 @@
+GridBackground {
+    --grid-background-color: rgb(40, 40, 40);
+    --line-color: rgba(193, 196, 192, 0.1);
+    --thick-line-color: rgba(193, 196, 192, 0.1);
+    --spacing: 15;
+}
+
+#behavior-name {
+    font-size: 24px;
+    -unity-font-style: bold;
+    border-width: 5px;
+}
+
+#description {
+    background-color: rgb(43, 43, 43);
+    border-width: 5px;
+    max-width: 400px;
+    white-space: normal;
+}
+
+.unity-toolbar-menu__arrow {
+    background-image: resource("Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/more-vert-dark.png");
+} 

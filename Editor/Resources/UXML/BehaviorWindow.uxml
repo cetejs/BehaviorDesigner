@@ -1,0 +1,49 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <BehaviorDesigner.Editor.BehaviorToolBar>
+        <ui:Button text="Save As..." display-tooltip-when-elided="true" name="save-as-btn" focusable="false" />
+        <ui:Button text="&lt;" display-tooltip-when-elided="true" name="left-btn" />
+        <ui:DropdownField name="behavior-dp" style="max-width: none; width: 120px;" />
+        <ui:Button text="&gt;" display-tooltip-when-elided="true" name="right-btn" />
+    </BehaviorDesigner.Editor.BehaviorToolBar>
+    <BehaviorDesigner.Editor.SplitView fixed-pane-initial-dimension="350">
+        <ui:VisualElement name="left-panel" style="min-width: 100px;">
+            <BehaviorDesigner.Editor.SplitView orientation="Vertical" fixed-pane-initial-dimension="400">
+                <ui:VisualElement name="inspector-container" style="background-color: rgb(56, 56, 56); min-height: 100px;">
+                    <uie:Toolbar style="background-color: rgb(37, 37, 37); border-left-width: 5px; justify-content: space-between;">
+                        <ui:Label text="Inspector" display-tooltip-when-elided="true" style="-unity-text-align: middle-center;" />
+                        <uie:ToolbarMenu display-tooltip-when-elided="true" />
+                    </uie:Toolbar>
+                    <BehaviorDesigner.Editor.InspectorView style="top: 5px;">
+                        <ui:ScrollView horizontal-scroller-visibility="Hidden" />
+                    </BehaviorDesigner.Editor.InspectorView>
+                </ui:VisualElement>
+                <ui:VisualElement name="variables-container" style="background-color: rgb(56, 56, 56); min-height: 100px;">
+                    <uie:Toolbar style="background-color: rgb(37, 37, 37); border-left-width: 5px; justify-content: space-between;">
+                        <ui:Label text="Variables" display-tooltip-when-elided="true" style="-unity-text-align: middle-center;" />
+                        <uie:ToolbarMenu display-tooltip-when-elided="true" />
+                    </uie:Toolbar>
+                    <BehaviorDesigner.Editor.VariablesView>
+                        <ui:VisualElement style="flex-shrink: 0;">
+                            <ui:TextField picking-mode="Ignore" label="Name" name="name-input" />
+                            <ui:VisualElement style="flex-direction: row;">
+                                <ui:DropdownField label="Type" index="-1" name="type-dp" style="width: auto; min-width: 300px;" />
+                                <ui:Button text="Add" display-tooltip-when-elided="true" name="add-btn" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:ScrollView horizontal-scroller-visibility="Hidden" />
+                    </BehaviorDesigner.Editor.VariablesView>
+                </ui:VisualElement>
+            </BehaviorDesigner.Editor.SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="min-width: 100px;">
+            <BehaviorDesigner.Editor.BehaviorView focusable="true" style="flex-grow: 1;">
+                <BehaviorDesigner.Editor.BehaviorNameView picking-mode="Ignore">
+                    <ui:Label display-tooltip-when-elided="true" name="behavior-name" picking-mode="Ignore" />
+                </BehaviorDesigner.Editor.BehaviorNameView>
+                <BehaviorDesigner.Editor.DescriptionView picking-mode="Ignore" style="flex-grow: 1; flex-direction: column-reverse;">
+                    <ui:Label display-tooltip-when-elided="true" name="description" picking-mode="Ignore" />
+                </BehaviorDesigner.Editor.DescriptionView>
+            </BehaviorDesigner.Editor.BehaviorView>
+        </ui:VisualElement>
+    </BehaviorDesigner.Editor.SplitView>
+</ui:UXML>

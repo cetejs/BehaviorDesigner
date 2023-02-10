@@ -1,0 +1,98 @@
+﻿using UnityEngine;
+using UnityEngine.AI;
+
+namespace BehaviorDesigner.Tasks.Movement
+{
+    public abstract class NavMeshMovement : Movement
+    {
+        [SerializeField]
+        protected SharedFloat speed = 10f;
+        [SerializeField]
+        protected SharedFloat angularSpeed = 120f;
+        [SerializeField]
+        protected SharedFloat arriveDistance = 0.1f;
+        [SerializeField]
+        protected SharedBool isStopOnTaskEnd = true;
+        [SerializeField]
+        protected SharedBool isUpdateRotation = true;
+
+        protected NavMeshAgent agent;
+
+        protected override bool HasPath
+        {
+            get { return agent.hasPath && agent.remainingDistance > arriveDistance.Value; }
+        }
+
+        protected override bool HasArrived
+        {
+            get
+            {
+                if (agent.pathPending)
+                {
+                    return false;
+                }
+
+                return agent.remainingDistance <= arriveDistance.Value;
+            }
+        }
+
+        protected override Vector3 Velocity
+        {
+            get { return agent.velocity; }
+        }
+
+        public override void OnAwake()
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+        public override void OnStart()
+        {
+            agent.speed = speed.Value;
+            agent.angularSpeed = angularSpeed.Value;
+            agent.isStopped = false;
+            UpdateRotation(isUpdateRotation.Value);
+        }
+
+        public override void OnEnd()
+        {
+            if (isStopOnTaskEnd.Value)
+            {
+                Stop();
+            }
+        }
+
+        protected bool SamplePosition(Vector3 position)
+        {
+            return NavMesh.SamplePosition(position, out NavMeshHit hit, float.MaxValue, NavMesh.AllAreas);
+        }
+
+        protected override bool SetDestination(Vector3 target)
+        {
+            agent.isStopped = false;
+            return agent.SetDestination(target);
+        }
+
+        protected override void UpdateRotation(bool isUpdate)
+        {
+            agent.updateRotation = isUpdate;
+        }
+
+        protected override void Stop()
+        {
+            if (agent.hasPath)
+            {
+                agent.isStopped = true;
+            }
+        }
+
+        public override void OnReset()
+        {
+            speed = 10f;
+            angularSpeed = 120f;
+            arriveDistance = 0.1f;
+            isStopOnTaskEnd = true;
+            isUpdateRotation = true;
+        }
+    }
+}
