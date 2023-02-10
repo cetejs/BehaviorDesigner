@@ -56,8 +56,9 @@ namespace BehaviorDesigner.Editor
 
             return null;
         }
-        
-        public static long GetFileId(Object obj) {
+
+        public static long GetFileId(Object obj)
+        {
             PropertyInfo info = typeof(SerializedObject).GetProperty("inspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
             SerializedObject serializedObj = new SerializedObject(obj);
             info.SetValue(serializedObj, InspectorMode.Debug, null);

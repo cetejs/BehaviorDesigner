@@ -22,9 +22,12 @@ namespace BehaviorDesigner.Tasks.UnityTransform
 
         public override TaskStatus OnUpdate()
         {
-            if (targetLookAt.Value) {
+            if (targetLookAt.Value)
+            {
                 Target.LookAt(targetLookAt.Value.transform);
-            } else {
+            }
+            else
+            {
                 Target.LookAt(worldPosition.Value, worldUp);
             }
 
