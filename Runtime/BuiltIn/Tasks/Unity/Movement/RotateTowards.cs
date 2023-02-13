@@ -44,13 +44,12 @@ namespace BehaviorDesigner.Tasks.Movement
 
         public override TaskStatus OnUpdate()
         {
-            Quaternion targetRotation = Target;
-            if (Quaternion.Angle(transform.rotation, targetRotation) < rotationEpsilon.Value)
+            if (Quaternion.Angle(transform.rotation, Target) < rotationEpsilon.Value)
             {
                 return TaskStatus.Success;
             }
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, speed.Value * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Target, speed.Value * Time.deltaTime);
             return TaskStatus.Running;
         }
 

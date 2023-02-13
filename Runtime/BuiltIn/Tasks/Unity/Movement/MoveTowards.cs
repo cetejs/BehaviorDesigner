@@ -35,15 +35,14 @@ namespace BehaviorDesigner.Tasks.Movement
 
         public override TaskStatus OnUpdate()
         {
-            Vector3 position = transform.position, targetPosition = Target;
-            Vector3 direction = targetPosition - position;
+            Vector3 direction = Target - transform.position;
             float sqrDistance = arriveDistance.Value * arriveDistance.Value;
             if (direction.sqrMagnitude <= sqrDistance)
             {
                 return TaskStatus.Success;
             }
 
-            transform.position = Vector3.MoveTowards(position, Target, speed.Value * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Target, speed.Value * Time.deltaTime);
             if (isLookAtTarget.Value && direction.sqrMagnitude > 0.01f)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction),  angularSpeed.Value * Time.deltaTime);
