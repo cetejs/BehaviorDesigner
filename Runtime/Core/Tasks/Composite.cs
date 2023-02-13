@@ -40,24 +40,23 @@ namespace BehaviorDesigner
             {
                 return composite.UpdateAbort();
             }
-            else
+
+            bool canUpdateAbort = abortType == AbortType.Both ||
+                                  abortType == AbortType.Self && currentStatus == TaskStatus.Running ||
+                                  abortType == AbortType.LowerPriority && currentStatus != TaskStatus.Running;
+            if (canUpdateAbort)
             {
-                bool canUpdateAbort = abortType == AbortType.Both ||
-                                      abortType == AbortType.Self && CanExecute ||
-                                      abortType == AbortType.LowerPriority && !CanExecute;
-                if (canUpdateAbort)
+                if (task is Decorator decorator)
                 {
-                    if (task is Decorator decorator)
+                    return decorator.UpdateAbort();
+                }
+
+                if (task is Conditional conditional)
+                {
+                    TaskStatus status = conditional.CurrentStatus;
+                    if (status != conditional.Update())
                     {
-                        return decorator.UpdateAbort();
-                    }
-                    else if (task is Conditional conditional)
-                    {
-                        TaskStatus status = conditional.CurrentStatus;
-                        if (status != conditional.Update())
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
