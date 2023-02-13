@@ -62,11 +62,6 @@ namespace BehaviorDesigner.Tasks.Movement
             }
         }
 
-        protected bool SamplePosition(Vector3 position)
-        {
-            return NavMesh.SamplePosition(position, out NavMeshHit hit, float.MaxValue, NavMesh.AllAreas);
-        }
-
         protected override bool SetDestination(Vector3 target)
         {
             agent.isStopped = false;

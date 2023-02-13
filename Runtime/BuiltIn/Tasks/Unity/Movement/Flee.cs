@@ -11,7 +11,8 @@ namespace BehaviorDesigner.Tasks.Movement
         [SerializeField]
         private SharedFloat lookAheadDistance = 5f;
         [SerializeField]
-        protected SharedTransform target;
+        private SharedTransform target;
+        private bool hasMoved;
 
         private Vector3 Target
         {
@@ -34,6 +35,7 @@ namespace BehaviorDesigner.Tasks.Movement
         public override void OnStart()
         {
             base.OnStart();
+            hasMoved = false;
             SetDestination(Target);
         }
 
@@ -47,27 +49,30 @@ namespace BehaviorDesigner.Tasks.Movement
 
             if (HasArrived)
             {
+                if (!hasMoved)
+                {
+                    return TaskStatus.Failure;
+                }
+
                 if (!SetDestination(Target))
                 {
                     return TaskStatus.Failure;
                 }
+
+                hasMoved = false;
             }
-            else if (Velocity.sqrMagnitude == 0f)
+            else
             {
-                return TaskStatus.Failure;
+                float sqrSpeed = Velocity.sqrMagnitude;
+                if (hasMoved && sqrSpeed <= 0f)
+                {
+                    return TaskStatus.Failure;
+                }
+
+                hasMoved = sqrSpeed > 0;
             }
 
             return TaskStatus.Running;
-        }
-
-        protected override bool SetDestination(Vector3 target)
-        {
-            if (!SamplePosition(target))
-            {
-                return false;
-            }
-
-            return base.SetDestination(target);
         }
 
         public override void OnReset()
