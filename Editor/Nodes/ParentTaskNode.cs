@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
@@ -15,6 +16,7 @@ namespace BehaviorDesigner.Editor
             base.Init(task, window);
             parentTask = task as ParentTask;
             AddChild(parentTask.MaxChildren > 1 ? Port.Capacity.Multi : Port.Capacity.Single);
+            AddDoubleClickSelection();
         }
 
         public override void Replace(Task task)
@@ -100,6 +102,17 @@ namespace BehaviorDesigner.Editor
 
                 parentTask.Children.Insert(i, node.Task);
             }
+        }
+
+        protected void AddDoubleClickSelection()
+        {
+            this.AddManipulator(new DoubleClickSelection(() =>
+            {
+                Deep(node =>
+                {
+                    window.View.AddToSelection(node);
+                });
+            }));
         }
 
         protected void AddChild(Port.Capacity capacity = Port.Capacity.Single)

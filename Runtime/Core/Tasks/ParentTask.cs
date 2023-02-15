@@ -42,6 +42,22 @@ namespace BehaviorDesigner
                 return false;
             }
         }
+        
+        public sealed override void Bind(IBehavior behavior)
+        {
+            base.Bind(behavior);
+            for (int i = 0; i < children.Count; i++)
+            {
+                if (children[i] == null)
+                {
+                    children.RemoveAt(i);
+                }
+                else
+                {
+                    children[i].Bind(behavior);
+                }
+            }
+        }
 
         public sealed override void Init(Behavior behavior)
         {

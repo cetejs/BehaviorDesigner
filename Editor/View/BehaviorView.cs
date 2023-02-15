@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,29 +12,53 @@ namespace BehaviorDesigner.Editor
         
         private BehaviorWindow window;
         private RootNode rootNode;
-        private Action<string, AskUser> onDeleteSelection;
         private readonly List<Port> compatiblePorts = new List<Port>();
         private readonly List<Task> copyTasks = new List<Task>();
         private readonly HashSet<Task> checkChildren = new HashSet<Task>();
+
+        public void Init()
+        {
+            styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/BehaviorWindow"));
+            AddDefaultManipulator();
+        }
 
         public void Init(BehaviorWindow window)
         {
             this.window = window;
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/BehaviorWindow"));
-            Insert(0, new GridBackground());
-            this.AddManipulator(new ContentZoomer());
-            this.AddManipulator(new ContentDragger());
-            this.AddManipulator(new SelectionDragger());
-            this.AddManipulator(new RectangleSelector());
-            this.AddManipulator(new FreehandSelector());
+            AddDefaultManipulator();
             RegisterCreationRequest();
             RegisterDeleteSelection();
             RegisterCopyAndPaste();
         }
 
-        public void RegisterDeleteSelectionCallback(Action<string, AskUser> callback)
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            onDeleteSelection += callback;
+            if (window)
+            {
+                if (evt.target is RootNode)
+                {
+                    return;
+                }
+                
+                base.BuildContextualMenu(evt);
+            }
+            else
+            {
+                evt.menu.AppendAction("Add BehaviorTree", action =>
+                {
+                    if (Selection.activeGameObject)
+                    {
+                        BehaviorTree behavior =  Selection.activeGameObject.AddComponent<BehaviorTree>();
+                        BehaviorWindow.ShowWindow(behavior);
+                    }
+                    else
+                    {
+                        BehaviorTree behavior = new GameObject().AddComponent<BehaviorTree>();
+                        Selection.activeGameObject = behavior.gameObject;
+                    }
+                });
+            }
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -69,6 +93,16 @@ namespace BehaviorDesigner.Editor
         {
             rootNode.Save();
             CollectAllDetachedTasks();
+        }
+
+        private void AddDefaultManipulator()
+        {
+            Insert(0, new GridBackground());
+            this.AddManipulator(new ContentZoomer());
+            this.AddManipulator(new ContentDragger());
+            this.AddManipulator(new SelectionDragger());
+            this.AddManipulator(new RectangleSelector());
+            this.AddManipulator(new FreehandSelector());
         }
 
         private void CollectAllDetachedTasks()
@@ -123,7 +157,6 @@ namespace BehaviorDesigner.Editor
             deleteSelection += (operationName, user) =>
             {
                 window.RegisterUndo("Delete Selection");
-                onDeleteSelection?.Invoke(operationName, user);
                 DeleteSelection();
                 window.Save();
             };

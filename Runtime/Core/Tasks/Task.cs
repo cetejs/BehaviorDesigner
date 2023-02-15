@@ -9,8 +9,6 @@ namespace BehaviorDesigner
     {
 #if UNITY_EDITOR
         [HideInInspector]
-        public string guid;
-        [HideInInspector]
         public Rect graphPosition = new Rect(400f, 300f, 100f, 100f);
         [HideInInspector]
         public string comment;
@@ -35,22 +33,22 @@ namespace BehaviorDesigner
             set { isDisabled = value; }
         }
 
+        public virtual void Bind(IBehavior behavior)
+        {
+            behavior.BindVariables(this);
+        }
+
         public virtual void Init(Behavior behavior)
         {
             owner = behavior;
             gameObject = behavior.gameObject;
             transform = behavior.transform;
-            behavior.BindVariables(this);
             OnAwake();
         }
 
         public virtual void Restart()
         {
             OnStart();
-            currentStatus = TaskStatus.Inactive;
-#if UNITY_EDITOR
-            UpdateNotifyOnEditor?.Invoke(currentStatus);
-#endif
         }
 
         public virtual void OnAwake()

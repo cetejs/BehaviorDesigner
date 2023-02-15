@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
-    public abstract class TaskNode : Node, IInspectorGUI
+    public abstract class TaskNode : Node
     {
         protected Task task;
         protected TaskPort parentPort;
@@ -146,6 +146,22 @@ namespace BehaviorDesigner.Editor
             Restore();
             window.Save();
         }
+        
+        public void OnGUI(VisualElement container)
+        {
+            container.Clear();
+            nameInput.value = title;
+            container.Add(nameInput);
+            if (IsAddComment)
+            {
+                container.Add(commentInput);
+            }
+
+            foreach (IFieldResolver resolver in resolvers)
+            {
+                container.Add(resolver.EditorField);
+            }
+        }
 
         public override void SetPosition(Rect newPos)
         {
@@ -182,7 +198,7 @@ namespace BehaviorDesigner.Editor
 
         protected virtual void OnTaskUpdate(TaskStatus status)
         {
-            if (expanded)
+            if (selected)
             {
                 foreach (IFieldResolver resolver in resolvers)
                 {
@@ -218,13 +234,6 @@ namespace BehaviorDesigner.Editor
                     AddToClassList("success");
                     break;
             }
-        }
-        
-        protected override void ToggleCollapse()
-        {
-            base.ToggleCollapse();
-            window.RegisterUndo("Expand Task");
-            window.Save();
         }
 
         protected void AddScriptMenuItem(ContextualMenuPopulateEvent evt)
@@ -283,22 +292,6 @@ namespace BehaviorDesigner.Editor
             else
             {
                 commentLabel.style.display = DisplayStyle.Flex;
-            }
-        }
-
-        public void OnGUI(VisualElement container)
-        {
-            container.Clear();
-            nameInput.value = title;
-            container.Add(nameInput);
-            if (IsAddComment)
-            {
-                container.Add(commentInput);
-            }
-
-            foreach (IFieldResolver resolver in resolvers)
-            {
-                container.Add(resolver.EditorField);
             }
         }
     }

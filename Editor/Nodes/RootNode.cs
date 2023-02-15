@@ -14,12 +14,12 @@ namespace BehaviorDesigner.Editor
             SetPosition(task.graphPosition);
             AddChild();
             Restore();
+            AddDoubleClickSelection();
         }
+
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             AddScriptMenuItem(evt);
-            base.BuildContextualMenu(evt);
         }
-        
     }
 }

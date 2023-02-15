@@ -9,20 +9,41 @@ namespace BehaviorDesigner.Tasks
         private ExternalBehavior behavior;
         [SerializeField]
         private bool isSyncVariables;
+        [SerializeField]
+        private bool isResetVariables;
+
+        private BehaviorSource source;
+        private Root root;
+        private bool isRestart;
 
         public override void OnStart()
         {
-            behavior.Source.Load();
-            behavior.Source.Root.Init(owner);
+            source = behavior.Source;
+            if (!isRestart)
+            {
+                source.Load();
+                root = source.Root;
+                root.Bind(behavior);
+                root.Init(owner);
+            }
+            else if (isResetVariables)
+            {
+                source.ReloadVariables();
+                root.Bind(behavior);
+            }
+
             if (isSyncVariables)
             {
                 SyncVariables(owner, behavior);
             }
+
+            root.OnStart();
+            isRestart = true;
         }
 
         public override TaskStatus OnUpdate()
         {
-            return behavior.Source.Root.OnUpdate();
+            return root.OnUpdate();
         }
 
         public override void OnEnd()
@@ -37,6 +58,7 @@ namespace BehaviorDesigner.Tasks
         {
             behavior = null;
             isSyncVariables = false;
+            isResetVariables = false;
         }
 
         private void SyncVariables(IBehavior b1, IBehavior b2)

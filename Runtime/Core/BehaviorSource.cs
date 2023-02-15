@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -27,7 +28,6 @@ namespace BehaviorDesigner
         private List<SharedVariable> variables;
         private Dictionary<string, int> sharedVariableIndex;
         private JsonSerialization jsonSerialization;
-        private bool isLoaded;
 
         public Root Root
         {
@@ -72,17 +72,16 @@ namespace BehaviorDesigner
 
         public void Load()
         {
-            if (Application.isPlaying && isLoaded)
+            if (Application.isPlaying && root != null)
             {
                 return;
             }
-
+            
             if (unityObjects == null)
             {
                 unityObjects = new List<UnityObject>();
             }
 
-            isLoaded = true;
             jsonSerialization = new JsonSerialization();
             jsonSerialization.LoadUnityObjects(ref unityObjects);
             if (string.IsNullOrEmpty(rootJson))
@@ -104,8 +103,8 @@ namespace BehaviorDesigner
                 {
                     detachedTasks = jsonSerialization.ToTaskArray(detachedTasksJson);
                 }
-            }
-
+            }  
+            
             if (string.IsNullOrEmpty(variablesJson))
             {
                 variables = new List<SharedVariable>();
@@ -122,13 +121,13 @@ namespace BehaviorDesigner
         {
             if (string.IsNullOrEmpty(variablesJson))
             {
-                variables.Clear();
+                variables = new List<SharedVariable>();
             }
             else
             {
                 variables = jsonSerialization.ToArray<SharedVariable>(variablesJson);
             }
-            
+
             UpdateVariableList();
         }
 
@@ -193,6 +192,47 @@ namespace BehaviorDesigner
         public IEnumerable<Task> GetDetachedTasks()
         {
             return detachedTasks;
+        }
+
+        public void BindVariables(Task task)
+        {
+            Type type = task.GetType();
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (FieldInfo field in fields)
+            {
+                if (!field.IsPublic && field.GetCustomAttribute<SerializeField>() == null)
+                {
+                    continue;
+                }
+
+                if (field.FieldType.IsSubclassOf(typeof(SharedVariable)))
+                {
+                    if (field.GetValue(task) is not SharedVariable value)
+                    {
+                        continue;
+                    }
+
+                    SharedVariable variable = GetVariable(value.Name);
+                    if (!value.IsShared)
+                    {
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(value.Name))
+                    {
+                        continue;
+                    }
+
+                    if (variable != null)
+                    {
+                        value.Bind(variable);
+                    }
+                    else
+                    {
+                        Debug.LogError($"{task.GetType().Name} shared variable {value.Name} does not exist");
+                    }
+                }
+            }
         }
 
         public void AddVariable(SharedVariable variable)

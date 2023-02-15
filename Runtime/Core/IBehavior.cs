@@ -11,5 +11,7 @@ namespace BehaviorDesigner
         int InstanceID { get; }
 
         Object Object { get; }
+
+        void BindVariables(Task task);
     }
 }

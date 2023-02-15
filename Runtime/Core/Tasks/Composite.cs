@@ -63,5 +63,10 @@ namespace BehaviorDesigner
 
             return false;
         }
+
+        public override void OnReset()
+        {
+            abortType = AbortType.None;
+        }
     }
 }

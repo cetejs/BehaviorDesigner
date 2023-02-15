@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <BehaviorDesigner.Editor.BehaviorToolBar>
         <ui:Button text="Save As..." display-tooltip-when-elided="true" name="save-as-btn" focusable="false" />
-        <ui:Button text="&lt;" display-tooltip-when-elided="true" name="left-btn" />
-        <ui:DropdownField name="behavior-dp" style="max-width: none; width: 120px;" />
-        <ui:Button text="&gt;" display-tooltip-when-elided="true" name="right-btn" />
+        <ui:Button text="&lt;" display-tooltip-when-elided="true" name="left-btn" style="width: 50px;" />
+        <ui:Button text="&gt;" display-tooltip-when-elided="true" name="right-btn" style="width: 50px;" />
+        <ui:DropdownField name="behavior-dp" />
     </BehaviorDesigner.Editor.BehaviorToolBar>
     <BehaviorDesigner.Editor.SplitView fixed-pane-initial-dimension="350">
         <ui:VisualElement name="left-panel" style="min-width: 100px;">

@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -85,7 +84,7 @@ namespace BehaviorDesigner
             if (resetValuesOnRestart)
             {
                 Source.ReloadVariables();
-                Root?.Init(this);
+                Root?.Bind(this);
             }
 
             isCompleted = false;
@@ -140,43 +139,7 @@ namespace BehaviorDesigner
 
         public void BindVariables(Task task)
         {
-            Type type = task.GetType();
-            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach (FieldInfo field in fields)
-            {
-                if (!field.IsPublic && field.GetCustomAttribute<SerializeField>() == null)
-                {
-                    continue;
-                }
-
-                if (field.FieldType.IsSubclassOf(typeof(SharedVariable)))
-                {
-                    if (field.GetValue(task) is not SharedVariable value)
-                    {
-                        continue;
-                    }
-
-                    SharedVariable variable = Source.GetVariable(value.Name);
-                    if (!value.IsShared)
-                    {
-                        continue;
-                    }
-
-                    if (string.IsNullOrEmpty(value.Name))
-                    {
-                        continue;
-                    }
-
-                    if (variable != null)
-                    {
-                        value.Bind(variable);
-                    }
-                    else
-                    {
-                        Debug.LogError($"The shared variable {value.Name} does not exist");
-                    }
-                }
-            }
+            Source.BindVariables(task);
         }
 
         private void Init()
@@ -184,6 +147,7 @@ namespace BehaviorDesigner
             isInit = true;
             isCompleted = false;
             Source.Load();
+            Root.Bind(this);
             Root.Init(this);
             OnBehaviorStart?.Invoke(this);
         }

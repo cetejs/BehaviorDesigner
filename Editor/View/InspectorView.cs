@@ -10,7 +10,8 @@ namespace BehaviorDesigner.Editor
         private BehaviorWindow window;
         private ScrollView scrollView;
         private ToolbarMenu toolbarMenu;
-        private IInspectorGUI inspector;
+        private TaskNode taskNode;
+        private Task task;
 
         public void Init(BehaviorWindow window)
         {
@@ -20,25 +21,25 @@ namespace BehaviorDesigner.Editor
             toolbarMenu = parent.Q<ToolbarMenu>();
             toolbarMenu.menu.AppendAction("Edit Script", action =>
             {
-                if (inspector != null)
+                if (task != null)
                 {
-                    BehaviorUtils.OpenScript(inspector.Task);
+                    BehaviorUtils.OpenScript(task);
                 }
             });
             
             toolbarMenu.menu.AppendAction("Locate Script", action =>
             {
-                if (inspector != null)
+                if (task != null)
                 {
-                    BehaviorUtils.SelectScript(inspector.Task);
+                    BehaviorUtils.SelectScript(task);
                 }
             });
             
             toolbarMenu.menu.AppendAction("Reset", action =>
             {
-                if (inspector != null)
+                if (taskNode != null)
                 {
-                    inspector.Reset();
+                    taskNode.Reset();
                     Restore();
                 }
             });
@@ -48,14 +49,27 @@ namespace BehaviorDesigner.Editor
 
         public void DoDraw()
         {
+            if (window.View.selection.Count == 0)
+            {
+                if (task != null)
+                {
+                    task = null;
+                    taskNode = null;
+                    Restore();
+                }
+
+                return;
+            }
+
             for (int i = window.View.selection.Count - 1; i >= 0; i--)
             {
-                if (window.View.selection[i] is IInspectorGUI selectable)
+                if (window.View.selection[i] is TaskNode node)
                 {
-                    if (inspector != selectable)
+                    if (task != node.Task)
                     {
-                        inspector = selectable;
-                        inspector.OnGUI(scrollView);
+                        task = node.Task;
+                        taskNode = node;
+                        taskNode.OnGUI(scrollView);
                         toolbarMenu.SetEnabled(true);
                     }
                     
@@ -66,30 +80,16 @@ namespace BehaviorDesigner.Editor
 
         public void Restore()
         {
-            if (inspector != null)
+            if (taskNode != null)
             {
-                TaskNode node = FindNode(inspector.Task);
-                if (node != null)
-                {
-                    node.OnGUI(scrollView);
-                }
+                taskNode.OnGUI(scrollView);
+                toolbarMenu.SetEnabled(true);
             }
-        }
-
-        private TaskNode FindNode(Task task)
-        {
-            foreach (VisualElement child in window.View.graphElements)
+            else
             {
-                if (child is TaskNode node && node.Task.guid == task.guid)
-                {
-                    if (node.Task.guid == task.guid)
-                    {
-                        return node;
-                    }
-                }
+                scrollView.Clear();
+                toolbarMenu.SetEnabled(false);
             }
-            
-            return null;
         }
     }
 }

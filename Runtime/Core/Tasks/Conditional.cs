@@ -2,9 +2,9 @@
 {
     public class Conditional : Task
     {
-        public sealed override void Init(Behavior behavior)
+        public sealed override void Bind(IBehavior behavior)
         {
-            base.Init(behavior);
+            base.Bind(behavior);
         }
         
         public sealed override void Restart()

@@ -33,7 +33,6 @@ namespace BehaviorDesigner.Editor
             window.RegisterUndo("Add Task");
             Type type = searchTreeEntry.userData as Type;
             Task task = Activator.CreateInstance(type) as Task;
-            task.guid = Guid.NewGuid().ToString();
             TaskNode node = window.CreateNode(task);
             Vector2 worldMousePos = window.rootVisualElement.ChangeCoordinatesTo(window.rootVisualElement.parent, context.screenMousePosition - window.position.position);
             Vector2 localMousePos = window.View.contentViewContainer.WorldToLocal(worldMousePos);

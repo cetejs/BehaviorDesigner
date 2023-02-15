@@ -34,5 +34,10 @@ namespace BehaviorDesigner
         {
             get { return this; }
         }
+
+        public void BindVariables(Task task)
+        {
+            Source.BindVariables(task);
+        }
     }
 }

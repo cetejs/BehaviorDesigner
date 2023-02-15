@@ -12,7 +12,7 @@ namespace BehaviorDesigner.Editor
         private Button saveAsBtn;
         private Button leftBtn;
         private Button rightBtn;
-        private DropdownField behaviorDropdown;
+        private DropdownField behaviorDp;
         private List<IBehavior> behaviors;
         private List<string> choices;
 
@@ -22,22 +22,22 @@ namespace BehaviorDesigner.Editor
             saveAsBtn = this.Q<Button>("save-as-btn");
             leftBtn = this.Q<Button>("left-btn");
             rightBtn = this.Q<Button>("right-btn");
-            behaviorDropdown = this.Q<DropdownField>("behavior-dp");
+            behaviorDp = this.Q<DropdownField>("behavior-dp");
             behaviors = new List<IBehavior>();
-            if (window.Behavior.Object is Component component)
-            {
-                component.GetComponents(behaviors);
-            }
-            else
-            {
-                behaviors.Add(window.Behavior);
-            }
-
+            behaviors.AddRange(Resources.FindObjectsOfTypeAll<Behavior>());
+            behaviors.AddRange(Resources.FindObjectsOfTypeAll<ExternalBehavior>());
             choices = new List<string>(behaviors.Count);
             foreach (IBehavior behavior in behaviors)
             {
-                choices.Add($"{behavior.Source.behaviorName} ({behavior.InstanceID})");
+                string choices = $"{behavior.Object.name} - {behavior.Source.behaviorName}";
+                if (behavior is ExternalBehavior)
+                {
+                    choices += " (external)";
+                }
+                
+                this.choices.Add(choices);
             }
+            
 
             saveAsBtn.clicked += () =>
             {
@@ -46,37 +46,20 @@ namespace BehaviorDesigner.Editor
 
             leftBtn.clicked += () =>
             {
-                int index = behaviorDropdown.index;
-                if (--index < 0)
-                {
-                    index = choices.Count - 1;
-                }
-
-                if (index != behaviorDropdown.index)
-                {
-                    window.Init(behaviors[index]);
-                }
+                window.UndoSelect(false);
             };
             
             rightBtn.clicked += () =>
             {
-                int index = behaviorDropdown.index;
-                if (++index >= choices.Count)
-                {
-                    index = 0;
-                }
-
-                if (index != behaviorDropdown.index)
-                {
-                    window.Init(behaviors[index]);
-                }
+                window.UndoSelect(true);
             };
 
-            behaviorDropdown.choices = choices;
-            behaviorDropdown.SetValueWithoutNotify($"{window.Behavior.Source.behaviorName} ({window.Behavior.InstanceID})");
-            behaviorDropdown.RegisterValueChangedCallback(evt =>
+            behaviorDp.choices = choices;
+            int index = behaviors.IndexOf(window.Behavior);
+            behaviorDp.SetValueWithoutNotify(index >= 0 ?choices[index] : "{None Selected}");
+            behaviorDp.RegisterValueChangedCallback(evt =>
             {
-                int index = choices.IndexOf(evt.newValue);
+                index = choices.IndexOf(evt.newValue);
                 window.Init(behaviors[index]);
             });
         }
