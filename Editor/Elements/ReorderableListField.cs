@@ -55,7 +55,7 @@ namespace BehaviorDesigner.Editor
             this.elementType = elementType;
             this.header = header;
             this.isAllowReorder = isAllowReorder;
-            
+
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/ReorderableList"));
             container = new IMGUIContainer(OnGUIHandler)
             {
@@ -66,28 +66,8 @@ namespace BehaviorDesigner.Editor
                     flexGrow = 1
                 }
             };
-
-            if (elementType == typeof(Vector2) ||
-                elementType == typeof(Vector2Int))
-            {
-                AddToClassList("list-v2");
-            }
-            else if (elementType == typeof(Vector3) ||
-                     elementType == typeof(Vector3Int))
-            {
-                AddToClassList("list-v3");
-            }
-            else if (elementType == typeof(Vector4) ||
-                     elementType == typeof(Quaternion))
-            {
-                AddToClassList("list-v4");
-            }
-            else
-            {
-                AddToClassList("list-v1");
-            }
-
             Add(container);
+            AddToClassList("list-field");
 
             if (doListHeader == null)
             {

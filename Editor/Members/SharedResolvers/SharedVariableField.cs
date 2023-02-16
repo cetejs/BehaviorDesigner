@@ -2,7 +2,6 @@
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
@@ -20,6 +19,7 @@ namespace BehaviorDesigner.Editor
 
         public SharedVariableField(FieldInfo fieldInfo, BehaviorWindow window) : base(null, null)
         {
+            AddToClassList("shared-variable-field");
             this.fieldInfo = fieldInfo;
             this.window = window;
             sharedNames = new List<string>();
@@ -34,6 +34,7 @@ namespace BehaviorDesigner.Editor
             });
 
             toggle = new Toggle();
+            toggle.name = "shared-toggle";
             toggle.RegisterValueChangedCallback(evt =>
             {
                 window.RegisterUndo("Update SharedState");
@@ -42,7 +43,7 @@ namespace BehaviorDesigner.Editor
                 ChangeSharedState();
             });
 
-            sharedNameField = new PopupField<string>();
+            sharedNameField = new PopupField<string>(fieldName);
             sharedNameField.RegisterValueChangedCallback(evt =>
             {
                 window.RegisterUndo("Update SharedName");
@@ -100,10 +101,8 @@ namespace BehaviorDesigner.Editor
             {
                 Clear();
                 CollectSharedNames();
-                Add(labelElement);
                 Add(sharedNameField);
                 Add(toggle);
-                labelElement.text = fieldName;
             }
             else
             {

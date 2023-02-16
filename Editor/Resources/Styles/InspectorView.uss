@@ -4,26 +4,22 @@
     flex-direction: column;
 }
 
-.unity-float-field__input {
-    min-width: 50px;
+#shared-toggle {
+    width: 15px;
+    position: absolute;
+    right: 0;
 }
 
-.unity-text-field__input {
-    min-width: 100px;
+.unity-base-field {
+    width: 99%;
 }
 
-.list-v1 {
-    min-width: 250px;
+.shared-variable-field {
+    width: 99%;
+    padding-right: 20px;
 }
 
-.list-v2 {
-    min-width: 300px;
-}
-
-.list-v3 {
-    min-width: 350px;
-}
-
-.list-v4 {
-    min-width: 400px;
+.list-field {
+    width: 102.5%;
+    left: -10px;
 }

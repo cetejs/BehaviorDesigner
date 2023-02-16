@@ -5,9 +5,9 @@
         <ui:Button text="&gt;" display-tooltip-when-elided="true" name="right-btn" style="width: 50px;" />
         <ui:DropdownField name="behavior-dp" />
     </BehaviorDesigner.Editor.BehaviorToolBar>
-    <BehaviorDesigner.Editor.SplitView fixed-pane-initial-dimension="350">
+    <BehaviorDesigner.Editor.SplitView fixed-pane-initial-dimension="480">
         <ui:VisualElement name="left-panel" style="min-width: 100px;">
-            <BehaviorDesigner.Editor.SplitView orientation="Vertical" fixed-pane-initial-dimension="400">
+            <BehaviorDesigner.Editor.SplitView orientation="Vertical" fixed-pane-initial-dimension="600">
                 <ui:VisualElement name="inspector-container" style="background-color: rgb(56, 56, 56); min-height: 100px;">
                     <uie:Toolbar style="background-color: rgb(37, 37, 37); border-left-width: 5px; justify-content: space-between;">
                         <ui:Label text="Inspector" display-tooltip-when-elided="true" style="-unity-text-align: middle-center;" />
@@ -23,11 +23,11 @@
                         <uie:ToolbarMenu display-tooltip-when-elided="true" />
                     </uie:Toolbar>
                     <BehaviorDesigner.Editor.VariablesView>
-                        <ui:VisualElement style="flex-shrink: 0;">
+                        <ui:VisualElement name="tool-field" style="flex-shrink: 0; display: none;">
                             <ui:TextField picking-mode="Ignore" label="Name" name="name-input" />
                             <ui:VisualElement style="flex-direction: row;">
-                                <ui:DropdownField label="Type" index="-1" name="type-dp" style="width: auto; min-width: 300px;" />
-                                <ui:Button text="Add" display-tooltip-when-elided="true" name="add-btn" />
+                                <ui:DropdownField label="Type" index="-1" name="type-dp" style="border-right-width: 45px; width: 100%;" />
+                                <ui:Button text="Add" display-tooltip-when-elided="true" name="add-btn" style="position: absolute; right: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:ScrollView horizontal-scroller-visibility="Hidden" />

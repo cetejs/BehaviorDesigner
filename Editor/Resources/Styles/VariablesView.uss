@@ -1,23 +1,8 @@
-.unity-float-field__input {
-    min-width: 50px;
+.unity-base-field {
+    width: 100%;
 }
 
-.unity-text-field__input {
-    min-width: 100px;
-}
-
-.list-v1 {
-    min-width: 250px;
-}
-
-.list-v2 {
-    min-width: 300px;
-}
-
-.list-v3 {
-    min-width: 350px;
-}
-
-.list-v4 {
-    min-width: 400px;
+.list-field {
+    width: 102.5%;
+    left: -10px;
 }

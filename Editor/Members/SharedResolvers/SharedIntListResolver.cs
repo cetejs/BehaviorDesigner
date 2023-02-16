@@ -4,17 +4,17 @@ using System.Reflection;
 
 namespace BehaviorDesigner.Editor
 {
-    public class SharedIntListField : SharedVariableField<BehaviorListField, SharedIntList, IList>
+    public class SharedIntListField : SharedVariableField<ObjectListField, SharedIntList, IList>
     {
         public SharedIntListField(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
         {
             this.fieldInfo = fieldInfo;
         }
 
-        protected override BehaviorListField CreateEditorField()
+        protected override ObjectListField CreateEditorField()
         {
             Type genericType = fieldInfo.FieldType.BaseType.GetGenericArguments()[0];
-            return new BehaviorListField(window, genericType, fieldInfo.Name);
+            return new ObjectListField(window, genericType, fieldInfo.Name);
         }
 
         protected override void SetFieldName(string name)

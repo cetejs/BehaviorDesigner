@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace BehaviorDesigner.Editor
 {
-    public class BehaviorListField : ReorderableListField
+    public class ObjectListField : ReorderableListField
     {
         private BehaviorWindow window;
 
@@ -12,7 +12,7 @@ namespace BehaviorDesigner.Editor
             get { return $"BehaviorDesign.Expanded.{window.BehaviorFileId}.{Header}"; }
         }
 
-        public BehaviorListField(
+        public ObjectListField(
             BehaviorWindow window,
             Type elementType,
             string header = "Reorder data:",

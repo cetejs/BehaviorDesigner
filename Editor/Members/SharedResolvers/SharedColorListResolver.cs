@@ -4,17 +4,17 @@ using System.Reflection;
 
 namespace BehaviorDesigner.Editor
 {
-    public class SharedColorListField : SharedVariableField<BehaviorListField, SharedColorList, IList>
+    public class SharedColorListField : SharedVariableField<ObjectListField, SharedColorList, IList>
     {
         public SharedColorListField(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
         {
             this.fieldInfo = fieldInfo;
         }
 
-        protected override BehaviorListField CreateEditorField()
+        protected override ObjectListField CreateEditorField()
         {
             Type genericType = fieldInfo.FieldType.BaseType.GetGenericArguments()[0];
-            return new BehaviorListField(window, genericType, fieldInfo.Name);
+            return new ObjectListField(window, genericType, fieldInfo.Name);
         }
 
         protected override void SetFieldName(string name)

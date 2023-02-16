@@ -27,6 +27,7 @@ namespace BehaviorDesigner.Editor
             this.variable = variable;
             this.field = field;
             BehaviorUtils.Load<VisualTreeAsset>("UXML/VariableField").CloneTree(this);
+            styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/VariablesView"));
             foldout = this.Q<Foldout>();
             foldout.text = variable.Name;
             foldout.Add(field);

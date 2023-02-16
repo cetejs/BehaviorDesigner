@@ -36,6 +36,7 @@ namespace BehaviorDesigner.Editor
         public void Init(BehaviorWindow window)
         {
             this.window = window;
+            this.Q("tool-field").style.display = DisplayStyle.Flex;
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/VariablesView"));
             scrollView = this.Q<ScrollView>();
             resolvers = new Dictionary<string, IFieldResolver>();

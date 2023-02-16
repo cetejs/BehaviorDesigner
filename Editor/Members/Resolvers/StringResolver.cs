@@ -10,6 +10,12 @@ namespace BehaviorDesigner.Editor
         {
         }
 
+        public override void Restore(Task task)
+        {
+            object value = fieldInfo.GetValue(task);
+            editorField.value = (string)value;
+        }
+
         protected override TextField CreateEditorField(FieldInfo fieldInfo)
         {
             return new TextField(fieldInfo.Name);

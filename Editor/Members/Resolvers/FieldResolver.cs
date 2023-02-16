@@ -67,7 +67,7 @@ namespace BehaviorDesigner.Editor
         public virtual void Restore(Task task)
         {
             object value = fieldInfo.GetValue(task);
-            if (value == null && !typeof(Object).IsAssignableFrom(typeof(TFieldValue)))
+            if (value == null && !typeof(Object).IsAssignableFrom(typeof(TFieldValue)) && !typeof(TFieldValue).IsPrimitive)
             {
                 value = Activator.CreateInstance(typeof(TFieldValue));
             }
