@@ -9,7 +9,7 @@ namespace BehaviorDesigner.Editor
 
         private string ExpandedKey
         {
-            get { return $"BehaviorDesign.Expanded.{window.BehaviorFileId}.{Header}"; }
+            get { return $"BehaviorDesign.Expanded.ObjectListField.{window.BehaviorFileId}.{Header}"; }
         }
 
         public ObjectListField(

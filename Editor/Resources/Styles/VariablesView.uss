@@ -1,8 +1,21 @@
+
 .unity-base-field {
     width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.list-field {
-    width: 102.5%;
-    left: -10px;
+#unity-content-container {
+    margin-left: 3;
+    margin-right: 3;
+}
+
+#tool-field {
+    margin-left: 3;
+    margin-right: 3;
+}
+
+#list-content {
+    margin-left: 0;
+    margin-right: 0;
 }

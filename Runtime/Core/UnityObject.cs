@@ -6,7 +6,7 @@ namespace BehaviorDesigner
     [Serializable]
     public class UnityObject
     {
-        public int instanceID;
+        public string id;
         public Object obj;
     }
 }

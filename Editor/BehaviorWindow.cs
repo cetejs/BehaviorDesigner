@@ -25,7 +25,7 @@ namespace BehaviorDesigner.Editor
         private long behaviorFileId;
         private int serializeVersion;
         private int selectedIndex = -1;
-        private bool isUndoSelect;
+        private bool isManualSelect;
 
         public IBehavior Behavior
         {
@@ -62,10 +62,10 @@ namespace BehaviorDesigner.Editor
         {
             BehaviorWindow window = GetWindow<BehaviorWindow>("Behavior Designer");
             window.minSize = new Vector2(700f, 100f);
-            window.Init(behavior);
+            window.Select(behavior);
         }
 
-        public void Init()
+        private void Init()
         {
             Clear();
             rootVisualElement.Clear();
@@ -77,21 +77,8 @@ namespace BehaviorDesigner.Editor
             root.Q<BehaviorView>().Init();
         }
 
-        public void Init(IBehavior behavior, bool isSelect = true)
+        private void Init(IBehavior behavior)
         {
-            if (behavior == null || !behavior.Object)
-            {
-                Init();
-                selectedIndex = -1;
-                selectedBehaviors.Clear();
-                return;
-            }
-
-            if (isSelect)
-            {
-                SelectBehavior(behavior);
-            }
-
             this.behavior = behavior;
             behaviorId = behavior.InstanceID;
             behaviorFileId = BehaviorUtils.GetFileId(behavior.Object);
@@ -118,7 +105,7 @@ namespace BehaviorDesigner.Editor
             Undo.ClearUndo(behavior.Object);
         }
 
-        public void Clear()
+        private void Clear()
         {
             behavior = null;
             nodeFactory = null;
@@ -127,19 +114,92 @@ namespace BehaviorDesigner.Editor
             nameView = null;
             descriptionView = null;
             behaviorView = null;
-            inspectorView = null; 
+            inspectorView = null;
             variablesView = null;
             behaviorId = -1;
             behaviorFileId = -1;
             serializeVersion = -1;
         }
 
-        public void Refresh()
+        public void Select(IBehavior behavior)
         {
+            if (behavior == null || !behavior.Object)
+            {
+                Init();
+                SelectObject(null);
+                return;
+            }
+
+            Init(behavior);
+            if (selectedIndex < selectedBehaviors.Count - 1)
+            {
+                selectedBehaviors.RemoveRange(selectedIndex + 1, selectedBehaviors.Count - selectedIndex - 1);
+            }
+
+            selectedBehaviors.Add(behavior);
+            selectedIndex = Mathf.Clamp(selectedIndex + 1, 0, selectedBehaviors.Count);
+            SelectObject(behavior);
+        }
+
+        public void UndoSelect(bool isRedo)
+        {
+            if (this.behavior != null)
+            {
+                selectedIndex += isRedo ? 1 : -1;
+            }
+
+            if (selectedIndex < 0 || selectedIndex >= selectedBehaviors.Count)
+            {
+                selectedIndex = Mathf.Clamp(selectedIndex, 0, selectedBehaviors.Count - 1);
+                return;
+            }
+
+            IBehavior behavior = selectedBehaviors[selectedIndex];
+            if (behavior == null || !behavior.Object)
+            {
+                Init();
+                SelectObject(null);
+                selectedIndex = -1;
+                selectedBehaviors.Clear();
+            }
+            else
+            {
+                Init(behavior);
+                SelectObject(behavior);
+            }
+        }
+
+        private void SelectObject(IBehavior behavior)
+        {
+            Object selectObj = null;
+            if (behavior != null)
+            {
+                if (behavior.Object is Component component)
+                {
+                    selectObj = component.gameObject;
+                }
+                else
+                {
+                    selectObj = behavior.Object;
+                }
+            }
+
+            if (Selection.activeObject != selectObj)
+            {
+                isManualSelect = true;
+                Selection.activeObject = selectObj;
+            }
+        }
+
+        private void Refresh()
+        {
+            selectedBehaviors.Clear();
             Object obj = EditorUtility.InstanceIDToObject(behaviorId);
             if (obj is IBehavior behavior)
             {
-                Init(behavior);
+                selectedIndex = -1;
+                selectedBehaviors.Clear();
+                Select(behavior);
             }
             else
             {
@@ -158,7 +218,7 @@ namespace BehaviorDesigner.Editor
             serializeVersion = ++Source.Version;
         }
 
-        public void Restore()
+        private void Restore()
         {
             Source.Load();
             behaviorView.Restore();
@@ -177,7 +237,7 @@ namespace BehaviorDesigner.Editor
             Save(behavior);
         }
 
-        public void Save(IBehavior behavior)
+        private void Save(IBehavior behavior)
         {
             if (!behavior.Object)
             {
@@ -206,20 +266,6 @@ namespace BehaviorDesigner.Editor
             Selection.activeObject = external;
         }
 
-        public void UndoSelect(bool isRedo)
-        {
-            selectedIndex += isRedo ? 1 : -1;
-            if (selectedIndex < 0 || selectedIndex >= selectedBehaviors.Count)
-            {
-                selectedIndex = Mathf.Clamp(selectedIndex, 0, selectedBehaviors.Count - 1);
-                return;
-            }
-
-            isUndoSelect = true;
-            Selection.activeObject = selectedBehaviors[selectedIndex].Object;
-            Init(selectedBehaviors[selectedIndex], false);
-        }
-
         public TaskNode CreateNode(Task task)
         {
             return nodeFactory.Create(task, this);
@@ -228,17 +274,6 @@ namespace BehaviorDesigner.Editor
         public IFieldResolver CreateField(FieldInfo fieldInfo)
         {
             return fieldFactory.Create(fieldInfo, this);
-        }
-
-        private void SelectBehavior(IBehavior behavior)
-        {
-            if (selectedIndex < selectedBehaviors.Count - 1)
-            {
-                selectedBehaviors.RemoveRange(selectedIndex + 1, selectedBehaviors.Count - selectedIndex - 1);
-            }
-
-            selectedBehaviors.Add(behavior);
-            selectedIndex = Mathf.Clamp(selectedIndex + 1, 0, selectedBehaviors.Count);
         }
 
         private void UndoRedoPerformed()
@@ -257,9 +292,9 @@ namespace BehaviorDesigner.Editor
 
         private void OnSelectionChanged()
         {
-            if (isUndoSelect)
+            if (isManualSelect)
             {
-                isUndoSelect = false;
+                isManualSelect = false;
                 return;
             }
 
@@ -271,13 +306,13 @@ namespace BehaviorDesigner.Editor
                     if (go.TryGetComponent(out IBehavior behavior) && !BehaviorUtils.HasComponent(go, behaviorId))
                     {
                         isSelectBehavior = true;
-                        Init(behavior);
+                        Select(behavior);
                     }
                 }
                 else if (Selection.activeObject is ExternalBehavior behavior)
                 {
                     isSelectBehavior = true;
-                    Init(behavior);
+                    Select(behavior);
                 }
             }
 

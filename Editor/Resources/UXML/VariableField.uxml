@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement name="variable-field" style="flex-shrink: 1; flex-direction: row;">
-        <ui:Foldout value="false" style="width: 99%;">
+        <ui:Foldout value="false" style="width: 100%;">
             <ui:TextField picking-mode="Ignore" label="Name" name="name-input" />
             <ui:DropdownField label="Type" index="-1" name="type-dp" />
         </ui:Foldout>

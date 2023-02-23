@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace BehaviorDesigner.Editor
 {
@@ -59,7 +60,7 @@ namespace BehaviorDesigner.Editor
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/ReorderableList"));
             container = new IMGUIContainer(OnGUIHandler)
             {
-                name = "ListContainer",
+                name = "list-content",
                 style =
                 {
                     flexShrink = 1,
@@ -92,6 +93,11 @@ namespace BehaviorDesigner.Editor
                 true,
                 true
             );
+
+            if (elementType == typeof(Rect) || elementType == typeof(RectInt))
+            {
+                reorderableList.elementHeight *= 2;
+            }
 
             AddCallbacks();
         }
@@ -134,10 +140,15 @@ namespace BehaviorDesigner.Editor
         {
             reorderableList.drawElementCallback = (rect, index, isActive, isFocused) =>
             {
+                
                 Rect labelRect = new Rect(rect.x, rect.y, 80f, EditorGUIUtility.singleLineHeight);
                 Rect fieldRect = new Rect(rect.x + 80f, rect.y, rect.width - 80f, EditorGUIUtility.singleLineHeight);
                 EditorGUI.LabelField(labelRect, $"Element {index}");
                 object value = dataList[index];
+                if (value == null && elementType != typeof(string) && !typeof(Object).IsAssignableFrom(elementType) && !elementType.IsPrimitive)
+                {
+                    value = Activator.CreateInstance(elementType);
+                }
 
                 EditorGUI.BeginChangeCheck();
                 value = DrawObject(fieldRect, value);

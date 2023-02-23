@@ -14,25 +14,25 @@ namespace BehaviorDesigner
         private readonly List<SerializableNode> serializableNodes = new List<SerializableNode>();
         private readonly List<SerializableField> serializableField = new List<SerializableField>();
         private readonly List<string> jsons = new List<string>();
-        private readonly Dictionary<int, Object> unityObjectDict = new Dictionary<int, Object>();
+        private readonly Dictionary<string, Object> unityObjectDict = new Dictionary<string, Object>();
 
         public void LoadUnityObjects(ref List<UnityObject> unityObjects)
         {
             unityObjectDict.Clear();
             foreach (UnityObject unityObject in unityObjects)
             {
-                unityObjectDict.Add(unityObject.instanceID, unityObject.obj);
+                unityObjectDict.TryAdd(unityObject.id, unityObject.obj);
             }
         }
 
         public void SaveUnityObjects(ref List<UnityObject> unityObjects)
         {
             unityObjects.Clear();
-            foreach (KeyValuePair<int, Object> kvPair in unityObjectDict)
+            foreach (KeyValuePair<string, Object> kvPair in unityObjectDict)
             {
                 unityObjects.Add(new UnityObject()
                 {
-                    instanceID = kvPair.Key,
+                    id = kvPair.Key,
                     obj = kvPair.Value
                 });
             }
@@ -184,7 +184,6 @@ namespace BehaviorDesigner
                 type = task.GetType().ToString(),
                 task = JsonUtility.ToJson(task),
                 childCount = childCount,
-                indexOfFirstChild = serializableNodes.Count + 1
             });
 
             if (parentTask != null)
@@ -292,13 +291,13 @@ namespace BehaviorDesigner
                     {
                         if (field.GetValue(source) is SharedVariable variable)
                         {
-                            if (variable.GetValue() is IList list)
+                            if (source is Task task && variable.GetValue() is IList list)
                             {
-                                foreach (object value in list)
+                                for (int i = 0; i < list.Count; i++)
                                 {
-                                    if (value is Object obj && obj)
+                                    if (list[i] is Object obj && obj)
                                     {
-                                        unityObjectDict.TryAdd(obj.GetInstanceID(), obj);
+                                        unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name, i), obj);
                                     }
                                 }
                             }
@@ -309,9 +308,9 @@ namespace BehaviorDesigner
                 {
                     if (field.GetValue(source) is SharedVariable variable)
                     {
-                        if (variable.GetValue() is Object obj && obj)
+                        if (source is Task task && variable.GetValue() is Object obj && obj)
                         {
-                            unityObjectDict.TryAdd(obj.GetInstanceID(), obj);
+                            unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name), obj);
                         }
                     }
                 }
@@ -319,7 +318,14 @@ namespace BehaviorDesigner
                 {
                     if (field.GetValue(source) is Object obj && obj)
                     {
-                        unityObjectDict.TryAdd(obj.GetInstanceID(), obj);
+                        if (source is Task task)
+                        {
+                            unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name), obj);
+                        }
+                        else if (source is SharedVariable variable)
+                        {
+                            unityObjectDict.TryAdd(variable.Name, obj);
+                        }
                     }
                 }
                 else if (typeof(IList).IsAssignableFrom(field.FieldType))
@@ -329,11 +335,24 @@ namespace BehaviorDesigner
                     {
                         if (field.GetValue(source) is IList list)
                         {
-                            foreach (object value in list)
+                            if (source is Task task)
                             {
-                                if (value is Object obj && obj)
+                                for (int i = 0; i < list.Count; i++)
                                 {
-                                    unityObjectDict.TryAdd(obj.GetInstanceID(), obj);
+                                    if (list[i] is Object obj && obj)
+                                    {
+                                        unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name, i), obj);
+                                    }
+                                }
+                            }
+                            else if (source is SharedVariable variable)
+                            {
+                                for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (list[i] is Object obj && obj)
+                                    {
+                                        unityObjectDict.TryAdd(string.Join("_", variable.Name, i), obj);
+                                    }
                                 }
                             }
                         }
@@ -360,16 +379,13 @@ namespace BehaviorDesigner
                     {
                         if (field.GetValue(source) is SharedVariable variable)
                         {
-                            if (variable.GetValue() is IList list)
+                            if (source is Task task && variable.GetValue() is IList list)
                             {
                                 for (int i = 0; i < list.Count; i++)
                                 {
-                                    if (list[i] is Object obj)
+                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name, i), out Object value))
                                     {
-                                        if (unityObjectDict.TryGetValue(obj.GetInstanceID(), out Object value))
-                                        {
-                                            list[i] = value;
-                                        }
+                                        list[i] = value;
                                     }
                                 }
                             }
@@ -380,9 +396,9 @@ namespace BehaviorDesigner
                 {
                     if (field.GetValue(source) is SharedVariable variable)
                     {
-                        if (variable.GetValue() is Object obj)
+                        if (source is Task task)
                         {
-                            if (unityObjectDict.TryGetValue(obj.GetInstanceID(), out Object value))
+                            if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name), out Object value))
                             {
                                 variable.SetValue(value);
                             }
@@ -391,9 +407,16 @@ namespace BehaviorDesigner
                 }
                 else if (typeof(Object).IsAssignableFrom(field.FieldType))
                 {
-                    if (field.GetValue(source) is Object obj)
+                    if (source is Task task)
                     {
-                        if (unityObjectDict.TryGetValue(obj.GetInstanceID(), out Object value))
+                        if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name), out Object value))
+                        {
+                            field.SetValue(source, value);
+                        }
+                    }
+                    else if (source is SharedVariable variable)
+                    {
+                        if (unityObjectDict.TryGetValue(variable.Name, out Object value))
                         {
                             field.SetValue(source, value);
                         }
@@ -406,11 +429,21 @@ namespace BehaviorDesigner
                     {
                         if (field.GetValue(source) is IList list)
                         {
-                            for (int i = 0; i < list.Count; i++)
+                            if (source is Task task)
                             {
-                                if (list[i] is Object obj)
+                                for (int i = 0; i < list.Count; i++)
                                 {
-                                    if (unityObjectDict.TryGetValue(obj.GetInstanceID(), out Object value))
+                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name, i), out Object value))
+                                    {
+                                        list[i] = value;
+                                    }
+                                }
+                            }
+                            else if (source is SharedVariable variable)
+                            {
+                                for (int i = 0; i < list.Count; i++)
+                                {
+                                    if (unityObjectDict.TryGetValue(string.Join("_", variable.Name, i), out Object value))
                                     {
                                         list[i] = value;
                                     }
@@ -428,7 +461,6 @@ namespace BehaviorDesigner
             public string type;
             public string task;
             public int childCount;
-            public int indexOfFirstChild;
         }
 
         [Serializable]

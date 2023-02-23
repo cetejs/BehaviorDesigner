@@ -163,6 +163,11 @@ namespace BehaviorDesigner.Editor
             }
         }
 
+        public override void OnSelected()
+        {
+            base.OnSelected();
+        }
+
         public override void SetPosition(Rect newPos)
         {
             base.SetPosition(newPos);

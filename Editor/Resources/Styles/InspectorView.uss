@@ -10,16 +10,23 @@
     right: 0;
 }
 
+#unity-content-container {
+    margin-left: 3;
+    margin-right: 3;
+}
+
+#list-content {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .unity-base-field {
-    width: 99%;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .shared-variable-field {
-    width: 99%;
+    width: 100%;
     padding-right: 20px;
-}
-
-.list-field {
-    width: 102.5%;
-    left: -10px;
 }

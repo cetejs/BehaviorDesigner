@@ -15,6 +15,7 @@ namespace BehaviorDesigner.Editor
         private readonly List<Port> compatiblePorts = new List<Port>();
         private readonly List<Task> copyTasks = new List<Task>();
         private readonly HashSet<Task> checkChildren = new HashSet<Task>();
+        private readonly List<int> selections = new List<int>();
 
         public void Init()
         {
@@ -81,12 +82,14 @@ namespace BehaviorDesigner.Editor
 
         public void Restore()
         {
+            CollectSelection();
             DeleteElements(graphElements.ToList());
             Root root = window.Behavior.Root;
             rootNode = new RootNode();
             rootNode.Init(root, window);
             AddElement(rootNode);
             RestoreDetachedTasks();
+            RestoreSelection();
         }
 
         public void Save()
@@ -129,7 +132,49 @@ namespace BehaviorDesigner.Editor
                 window.Source.AddDetachedTask(taskNode.Task);
             }
         }
-        
+
+        private void CollectSelection()
+        {
+            selections.Clear();
+            foreach (ISelectable selectable in selection)
+            {
+                if (selectable is TaskNode node)
+                {
+                    selections.Add(node.Task.Guid);
+                }
+            }
+        }
+
+        private void RestoreSelection()
+        {
+            int lastSelectionId = 0;
+            TaskNode lastSelection = null;
+            if (selections.Count > 0)
+            {
+                lastSelectionId = selections[selections.Count -1];
+            }
+
+            foreach (GraphElement element in graphElements)
+            {
+                if (element is TaskNode node && selections.Contains(node.Task.Guid))
+                {
+                    if (node.Task.Guid == lastSelectionId)
+                    {
+                        lastSelection = node;
+                    }
+                    else
+                    {
+                        AddToSelection(element);
+                    }
+                }
+            }
+
+            if (lastSelection != null)
+            {
+                AddToSelection(lastSelection);
+            }
+        }
+
         private void RestoreDetachedTasks()
         {
             window.Source.UpdateDetachedTasks();
@@ -209,6 +254,7 @@ namespace BehaviorDesigner.Editor
                     AddElement(node);
                     node.Deep(tempNode =>
                     {
+                        tempNode.Task.Guid = window.Source.NewTaskGuid();
                         tempNode.Task.graphPosition.position += new Vector2(10f, 10f);
                         tempNode.SetPosition(tempNode.Task.graphPosition);
                         AddToSelection(tempNode);

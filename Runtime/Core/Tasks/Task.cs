@@ -16,11 +16,22 @@ namespace BehaviorDesigner
 #endif
         [HideInInspector]
         [SerializeField]
+        private int guid;
+        [HideInInspector]
+        [SerializeField]
         protected bool isDisabled;
         protected GameObject gameObject;
         protected Transform transform;
         protected Behavior owner;
         protected TaskStatus currentStatus;
+
+        public int Guid
+        {
+            get { return guid; }
+#if UNITY_EDITOR
+            set { guid = value; }
+#endif
+        }
 
         public TaskStatus CurrentStatus
         {

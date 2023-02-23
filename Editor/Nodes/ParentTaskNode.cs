@@ -106,7 +106,7 @@ namespace BehaviorDesigner.Editor
 
         protected void AddDoubleClickSelection()
         {
-            this.AddManipulator(new DoubleClickSelection(() =>
+            this.AddManipulator(new DoubleClickSelector(() =>
             {
                 Deep(node =>
                 {

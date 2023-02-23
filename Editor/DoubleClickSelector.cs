@@ -3,14 +3,14 @@ using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
-    public class DoubleClickSelection : MouseManipulator
+    public class DoubleClickSelector : MouseManipulator
     {
         private double time;
         private double duration;
 
-        public System.Action onDoubleClicked;
+        private System.Action onDoubleClicked;
 
-        public DoubleClickSelection(System.Action callback, double duration = 0.3d)
+        public DoubleClickSelector(System.Action callback, double duration = 0.3d)
         {
             time = EditorApplication.timeSinceStartup;
             onDoubleClicked = callback;
