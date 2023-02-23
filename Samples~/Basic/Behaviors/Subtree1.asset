@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bafb119261a44669d0baf2a5f9df9ca, type: 3}
+  m_Name: Subtree1
+  m_EditorClassIdentifier: 
+  source:
+    behaviorName: Behavior
+    group: 0
+    behaviorDescription: 
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"guid\":0,\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":299.0,\"width\":150.0,\"height\":94.0},\"comment\":\"\",\"isDisabled\":false}","childCount":1,"indexOfFirstChild":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"guid\":52,\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":449.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"isDisabled\":false,\"abortType\":0}","childCount":3,"indexOfFirstChild":2},{"type":"BehaviorDesigner.Tasks.Log","task":"{\"guid\":53,\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":230.0,\"y\":582.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"isDisabled\":false,\"isLogError\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"logText\":{\"name\":\"String1\",\"isShared\":true,\"value\":\"1\"}}","childCount":0,"indexOfFirstChild":3},{"type":"BehaviorDesigner.Tasks.Wait","task":"{\"guid\":54,\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":582.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"isDisabled\":false,\"waitTime\":{\"name\":\"\",\"isShared\":false,\"value\":3.0},\"isRandomWait\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"randomRange\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":1.0}}}","childCount":0,"indexOfFirstChild":4},{"type":"BehaviorDesigner.Tasks.UnityMath.SetString","task":"{\"guid\":55,\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":577.0,\"y\":582.0,\"width\":150.0,\"height\":89.0},\"comment\":\"Subtree1
+      set sting\",\"isDisabled\":false,\"stringValue\":{\"name\":\"Invalid String\",\"isShared\":false,\"value\":\"Subtree1
+      set sting\"},\"storeResult\":{\"name\":\"String1\",\"isShared\":true,\"value\":\"\"}}","childCount":0,"indexOfFirstChild":5}]'
+    detachedTasksJson: 
+    variablesJson: '[{"type":"BehaviorDesigner.SharedString","json":"{\"name\":\"String1\",\"isShared\":false,\"value\":\"\"}"},{"type":"BehaviorDesigner.SharedBool","json":"{\"name\":\"1\",\"isShared\":false,\"value\":false}"},{"type":"BehaviorDesigner.SharedFloat","json":"{\"name\":\"123\",\"isShared\":false,\"value\":123.0}"}]'
+    version: 242
+    guidCount: 55
+    unityObjects: []
