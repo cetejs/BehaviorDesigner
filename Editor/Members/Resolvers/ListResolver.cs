@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Reflection;
-using UnityEditor;
 
 namespace BehaviorDesigner.Editor
 {

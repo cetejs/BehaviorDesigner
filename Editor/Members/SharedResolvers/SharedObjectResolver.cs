@@ -1,11 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using UnityEditor.UIElements;
-using UnityEngine;
-using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace BehaviorDesigner.Editor
 {
-    public class SharedObjectField : SharedVariableField<ObjectField, SharedObject, Object>
+    public class SharedObjectField : SharedVariableField<ObjectField, SharedVariable, Object>
     {
         public SharedObjectField(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
         {
@@ -15,12 +15,12 @@ namespace BehaviorDesigner.Editor
         protected override ObjectField CreateEditorField()
         {
             ObjectField field = new ObjectField();
-            field.objectType = typeof(Object);
+            field.objectType = fieldInfo.FieldType.BaseType.GetGenericArguments()[0];
             return field;
         }
     }
 
-    public class SharedObjectResolver : FieldResolver<SharedObjectField, SharedObject>
+    public class SharedObjectResolver : FieldResolver<SharedObjectField, SharedVariable>
     {
         public SharedObjectResolver(FieldInfo fieldInfo, BehaviorWindow window) : base(fieldInfo, window)
         {
@@ -33,7 +33,17 @@ namespace BehaviorDesigner.Editor
 
         public static bool IsAcceptable(FieldInfo info)
         {
-            return info.FieldType == typeof(SharedObject);
+            if (!info.FieldType.IsSubclassOf(typeof(SharedVariable)))
+            {
+                return false;
+            }
+
+            if (info.FieldType.BaseType.GetGenericTypeDefinition() != typeof(SharedVariable<>))
+            {
+                return false;
+            }
+
+            return typeof(Object).IsAssignableFrom(info.FieldType.BaseType.GetGenericArguments()[0]);
         }
     }
 }

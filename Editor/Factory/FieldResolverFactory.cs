@@ -19,14 +19,7 @@ namespace BehaviorDesigner.Editor
                 }
             }
 
-            if (fieldInfo.FieldType.IsSubclassOf(typeof(SharedVariable)))
-            {
-                return new SharedObjectResolver(fieldInfo, window);
-            }
-            else
-            {
-                return new ObjectResolver(fieldInfo, window);
-            }
+            return new UnSupportResolver(fieldInfo);
         }
 
         private void CollectAllResolvers()

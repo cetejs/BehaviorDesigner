@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
@@ -20,7 +19,7 @@ namespace BehaviorDesigner.Editor
 
         public static bool IsAcceptable(FieldInfo info)
         {
-            return info.FieldType == typeof(Object);
+            return typeof(Object).IsAssignableFrom(info.FieldType);
         }
     }
 }

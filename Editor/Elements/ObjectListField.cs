@@ -7,11 +7,6 @@ namespace BehaviorDesigner.Editor
     {
         private BehaviorWindow window;
 
-        private string ExpandedKey
-        {
-            get { return $"BehaviorDesign.Expanded.ObjectListField.{window.BehaviorFileId}.{Header}"; }
-        }
-
         public ObjectListField(
             BehaviorWindow window,
             Type elementType,
@@ -19,7 +14,6 @@ namespace BehaviorDesigner.Editor
             bool isAllowReorder = true) : base(elementType, ObjectNames.NicifyVariableName(header), isAllowReorder)
         {
             this.window = window;
-            IsExpended = EditorPrefs.GetBool(ExpandedKey);
             RegisterCallbacks();
         }
 
@@ -53,11 +47,6 @@ namespace BehaviorDesigner.Editor
                 list[oldIndex] = list[newIndex];
                 list[newIndex] = oldValue;
                 window.Save();
-            };
-
-            onExpendedCallback += isExpended =>
-            {
-                EditorPrefs.SetBool(ExpandedKey, isExpended);
             };
         }
     }

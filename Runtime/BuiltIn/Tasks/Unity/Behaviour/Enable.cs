@@ -4,7 +4,7 @@ namespace BehaviorDesigner.Tasks.UnityBehaviour
 {
     [TaskCategory("Behaviour")]
     [TaskName("Enable (Behaviour)")]
-    [TaskDescription("Sets enable behaviour")]
+    [TaskDescription("Sets enable behaviour.")]
     public class Enable : Action
     {
         [SerializeField]

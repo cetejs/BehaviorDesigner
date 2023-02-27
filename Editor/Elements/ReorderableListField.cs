@@ -287,12 +287,16 @@ namespace BehaviorDesigner.Editor
                 {
                     value = EditorGUI.RectIntField(rect, (RectInt) value);
                 }
+                else if (typeof(Object).IsAssignableFrom(elementType))
+                {
+                    value = EditorGUI.ObjectField(rect, (Object) value, elementType, true);
+                }
                 else
                 {
-                    value = EditorGUI.ObjectField(rect, (UnityEngine.Object) value, elementType, true);
+                    EditorGUI.LabelField(rect, $"Unsupported Type: {elementType}");
                 }
             }
-            catch
+            catch (ExitGUIException)
             {
             }
 

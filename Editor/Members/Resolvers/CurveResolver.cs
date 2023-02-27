@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
@@ -14,6 +13,17 @@ namespace BehaviorDesigner.Editor
         protected override CurveField CreateEditorField(FieldInfo fieldInfo)
         {
             return new CurveField(fieldInfo.Name);
+        }
+
+        public override void Restore(Task task)
+        {
+            object value = fieldInfo.GetValue(task);
+            if (value == null)
+            {
+                value = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
+            }
+
+            editorField.value = (AnimationCurve) value;
         }
 
         public static bool IsAcceptable(FieldInfo info)
