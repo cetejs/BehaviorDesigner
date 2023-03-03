@@ -401,15 +401,15 @@ MonoBehaviour:
     behaviorName: Seek
     group: 0
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":451.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":2,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":597.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Seek","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":506.0,\"y\":597.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"2\",\"isShared\":false,\"value\":{\"instanceID\":68466}},\"targetPosition\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":461.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":607.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Seek","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":506.0,\"y\":607.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"2\",\"isShared\":false,\"value\":{\"instanceID\":30796}},\"targetPosition\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 50
-    guidCount: 3
+    version: 58
+    taskIdCount: 3
     unityObjects:
-    - id: 3_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_target
+    - id: 3_target
       obj: {fileID: 1664398898}
   external: {fileID: 0}
 --- !u!114 &669974319
@@ -431,15 +431,15 @@ MonoBehaviour:
     behaviorName: Follow
     group: 1
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":459.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":2,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":605.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Follow","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":492.0,\"y\":605.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68378}},\"moveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":1.0}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":469.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":615.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Follow","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":492.0,\"y\":615.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30708}},\"moveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":1.0}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 18
-    guidCount: 3
+    version: 26
+    taskIdCount: 3
     unityObjects:
-    - id: 3_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_target
+    - id: 3_target
       obj: {fileID: 898981029}
   external: {fileID: 0}
 --- !u!114 &669974320
@@ -475,15 +475,15 @@ MonoBehaviour:
     behaviorName: Flee
     group: 2
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":443.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":2,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":590.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Flee","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":513.0,\"y\":590.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"fleeDistance\":{\"name\":\"\",\"isShared\":false,\"value\":20.0},\"lookAheadDistance\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68378}}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":453.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":600.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Flee","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":513.0,\"y\":600.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"fleeDistance\":{\"name\":\"\",\"isShared\":false,\"value\":20.0},\"lookAheadDistance\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30708}}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 329
-    guidCount: 3
+    version: 337
+    taskIdCount: 3
     unityObjects:
-    - id: 3_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_target
+    - id: 3_target
       obj: {fileID: 898981029}
   external: {fileID: 0}
 --- !u!114 &669974322
@@ -505,15 +505,15 @@ MonoBehaviour:
     behaviorName: MoveTowards
     group: 3
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":452.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Disable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":312.0,\"y\":614.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":5,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.MoveTowards","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":506.0,\"y\":614.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isLookAtTarget\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68428}},\"targetPosition\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":462.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Disable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":312.0,\"y\":624.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.MoveTowards","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":506.0,\"y\":624.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isLookAtTarget\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30758}},\"targetPosition\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 33
-    guidCount: 5
+    version: 41
+    taskIdCount: 3
     unityObjects:
-    - id: 5_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_target
+    - id: 3_target
       obj: {fileID: 1237684813}
   external: {fileID: 0}
 --- !u!114 &669974323
@@ -535,15 +535,15 @@ MonoBehaviour:
     behaviorName: RotateTowards
     group: 4
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":457.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":2,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Disable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":322.0,\"y\":624.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.RotateTowards","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":498.0,\"y\":624.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"rotationEpsilon\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isOnlyY\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68308}},\"targetRotation\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":467.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Disable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":322.0,\"y\":634.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.RotateTowards","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":498.0,\"y\":634.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"rotationEpsilon\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isOnlyY\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"target\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30638}},\"targetRotation\":{\"name\":\"\",\"isShared\":false,\"value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0}}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 19
-    guidCount: 3
+    version: 27
+    taskIdCount: 3
     unityObjects:
-    - id: 3_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_target
+    - id: 3_target
       obj: {fileID: 530432083}
   external: {fileID: 0}
 --- !u!114 &669974324
@@ -565,21 +565,21 @@ MonoBehaviour:
     behaviorName: Patrol
     group: 5
     behaviorDescription: 
-    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"guid\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":456.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"guid\":2,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":603.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":3,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":68318}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Patrol","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":507.0,\"y\":603.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"guid\":1,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isRandomPatrol\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"isReversePatrol\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"waypointPauseDuration\":{\"name\":\"\",\"isShared\":false,\"value\":1.0},\"waypoints\":{\"name\":\"\",\"isShared\":false,\"value\":[{\"instanceID\":68466},{\"instanceID\":68378},{\"instanceID\":68428},{\"instanceID\":68308}]}}","childCount":0}]'
+    rootJson: '[{"type":"BehaviorDesigner.Root","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":300.0,\"width\":100.0,\"height\":100.0},\"comment\":\"\",\"id\":0,\"isDisabled\":false}","childCount":1},{"type":"BehaviorDesigner.Tasks.Sequence","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":400.0,\"y\":466.0,\"width\":150.0,\"height\":98.0},\"comment\":\"\",\"id\":1,\"isDisabled\":false,\"abortType\":0}","childCount":2},{"type":"BehaviorDesigner.Tasks.UnityBehaviour.Enable","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":308.0,\"y\":613.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":2,\"isDisabled\":false,\"behaviour\":{\"name\":\"\",\"isShared\":false,\"value\":{\"instanceID\":30648}}}","childCount":0},{"type":"BehaviorDesigner.Tasks.Movement.Patrol","task":"{\"graphPosition\":{\"serializedVersion\":\"2\",\"x\":507.0,\"y\":613.0,\"width\":150.0,\"height\":74.0},\"comment\":\"\",\"id\":3,\"isDisabled\":false,\"speed\":{\"name\":\"\",\"isShared\":false,\"value\":10.0},\"angularSpeed\":{\"name\":\"\",\"isShared\":false,\"value\":120.0},\"arriveDistance\":{\"name\":\"\",\"isShared\":false,\"value\":0.10000000149011612},\"isStopOnTaskEnd\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isUpdateRotation\":{\"name\":\"\",\"isShared\":false,\"value\":true},\"isRandomPatrol\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"isReversePatrol\":{\"name\":\"\",\"isShared\":false,\"value\":false},\"waypointPauseDuration\":{\"name\":\"\",\"isShared\":false,\"value\":1.0},\"waypoints\":{\"name\":\"\",\"isShared\":false,\"value\":[{\"instanceID\":30796},{\"instanceID\":30708},{\"instanceID\":30758},{\"instanceID\":30638}]}}","childCount":0}]'
     detachedTasksJson: 
     variablesJson: 
-    version: 36
-    guidCount: 3
+    version: 47
+    taskIdCount: 3
     unityObjects:
-    - id: 3_behaviour
+    - id: 2_behaviour
       obj: {fileID: 669974316}
-    - id: 1_waypoints_0
+    - id: 3_waypoints_0
       obj: {fileID: 1664398898}
-    - id: 1_waypoints_1
+    - id: 3_waypoints_1
       obj: {fileID: 898981029}
-    - id: 1_waypoints_2
+    - id: 3_waypoints_2
       obj: {fileID: 1237684813}
-    - id: 1_waypoints_3
+    - id: 3_waypoints_3
       obj: {fileID: 530432083}
   external: {fileID: 0}
 --- !u!1 &705507993
