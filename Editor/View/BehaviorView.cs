@@ -140,7 +140,7 @@ namespace BehaviorDesigner.Editor
             {
                 if (selectable is TaskNode node)
                 {
-                    selections.Add(node.Task.Guid);
+                    selections.Add(node.Task.Id);
                 }
             }
         }
@@ -156,9 +156,9 @@ namespace BehaviorDesigner.Editor
 
             foreach (GraphElement element in graphElements)
             {
-                if (element is TaskNode node && selections.Contains(node.Task.Guid))
+                if (element is TaskNode node && selections.Contains(node.Task.Id))
                 {
-                    if (node.Task.Guid == lastSelectionId)
+                    if (node.Task.Id == lastSelectionId)
                     {
                         lastSelection = node;
                     }
@@ -254,7 +254,7 @@ namespace BehaviorDesigner.Editor
                     AddElement(node);
                     node.Deep(tempNode =>
                     {
-                        tempNode.Task.Guid = window.Source.NewTaskGuid();
+                        tempNode.Task.Id = window.Source.NewTaskId();
                         tempNode.Task.graphPosition.position += new Vector2(10f, 10f);
                         tempNode.SetPosition(tempNode.Task.graphPosition);
                         AddToSelection(tempNode);

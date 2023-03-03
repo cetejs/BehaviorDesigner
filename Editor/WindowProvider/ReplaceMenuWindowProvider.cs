@@ -41,7 +41,7 @@ namespace BehaviorDesigner.Editor
             window.RegisterUndo("Replace TaskNode");
             Type type = searchTreeEntry.userData as Type;
             Task task = Activator.CreateInstance(type) as Task;
-            task.Guid = window.Source.NewTaskGuid();
+            task.Id = window.Source.NewTaskId();
             node.Replace(task);
             window.Save();
             return true;

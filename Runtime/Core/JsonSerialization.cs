@@ -19,6 +19,14 @@ namespace BehaviorDesigner
         public void LoadUnityObjects(ref List<UnityObject> unityObjects)
         {
             unityObjectDict.Clear();
+            for (int i = unityObjects.Count - 1; i >= 0; i--)
+            {
+                if (!unityObjects[i].obj)
+                {
+                    unityObjects.RemoveAt(i);
+                }
+            }
+
             foreach (UnityObject unityObject in unityObjects)
             {
                 unityObjectDict.TryAdd(unityObject.id, unityObject.obj);
@@ -30,6 +38,11 @@ namespace BehaviorDesigner
             unityObjects.Clear();
             foreach (KeyValuePair<string, Object> kvPair in unityObjectDict)
             {
+                if (!kvPair.Value)
+                {
+                    continue;
+                }
+
                 unityObjects.Add(new UnityObject()
                 {
                     id = kvPair.Key,
@@ -297,7 +310,7 @@ namespace BehaviorDesigner
                                 {
                                     if (list[i] is Object obj && obj)
                                     {
-                                        unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name, i), obj);
+                                        unityObjectDict.TryAdd(string.Join("_", task.Id, field.Name, i), obj);
                                     }
                                 }
                             }
@@ -310,7 +323,7 @@ namespace BehaviorDesigner
                     {
                         if (source is Task task && variable.GetValue() is Object obj && obj)
                         {
-                            unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name), obj);
+                            unityObjectDict.TryAdd(string.Join("_", task.Id, field.Name), obj);
                         }
                     }
                 }
@@ -320,7 +333,7 @@ namespace BehaviorDesigner
                     {
                         if (source is Task task)
                         {
-                            unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name), obj);
+                            unityObjectDict.TryAdd(string.Join("_", task.Id, field.Name), obj);
                         }
                         else if (source is SharedVariable variable)
                         {
@@ -341,7 +354,7 @@ namespace BehaviorDesigner
                                 {
                                     if (list[i] is Object obj && obj)
                                     {
-                                        unityObjectDict.TryAdd(string.Join("_", task.Guid, field.Name, i), obj);
+                                        unityObjectDict.TryAdd(string.Join("_", task.Id, field.Name, i), obj);
                                     }
                                 }
                             }
@@ -383,7 +396,7 @@ namespace BehaviorDesigner
                             {
                                 for (int i = 0; i < list.Count; i++)
                                 {
-                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name, i), out Object value))
+                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Id, field.Name, i), out Object value))
                                     {
                                         list[i] = value;
                                     }
@@ -398,7 +411,7 @@ namespace BehaviorDesigner
                     {
                         if (source is Task task)
                         {
-                            if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name), out Object value))
+                            if (unityObjectDict.TryGetValue(string.Join("_", task.Id, field.Name), out Object value))
                             {
                                 variable.SetValue(value);
                             }
@@ -409,7 +422,7 @@ namespace BehaviorDesigner
                 {
                     if (source is Task task)
                     {
-                        if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name), out Object value))
+                        if (unityObjectDict.TryGetValue(string.Join("_", task.Id, field.Name), out Object value))
                         {
                             field.SetValue(source, value);
                         }
@@ -433,7 +446,7 @@ namespace BehaviorDesigner
                             {
                                 for (int i = 0; i < list.Count; i++)
                                 {
-                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Guid, field.Name, i), out Object value))
+                                    if (unityObjectDict.TryGetValue(string.Join("_", task.Id, field.Name, i), out Object value))
                                     {
                                         list[i] = value;
                                     }

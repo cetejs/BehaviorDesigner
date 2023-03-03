@@ -16,7 +16,7 @@ namespace BehaviorDesigner
 #endif
         [HideInInspector]
         [SerializeField]
-        private int guid;
+        private int id;
         [HideInInspector]
         [SerializeField]
         protected bool isDisabled;
@@ -25,11 +25,11 @@ namespace BehaviorDesigner
         protected Behavior owner;
         protected TaskStatus currentStatus;
 
-        public int Guid
+        public int Id
         {
-            get { return guid; }
+            get { return id; }
 #if UNITY_EDITOR
-            set { guid = value; }
+            set { id = value; }
 #endif
         }
 

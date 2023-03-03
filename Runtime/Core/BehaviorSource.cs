@@ -22,7 +22,7 @@ namespace BehaviorDesigner
         [SerializeField]
         private int version;
         [SerializeField]
-        private int guidCount;
+        private int taskIdCount;
         [SerializeField]
         private List<UnityObject> unityObjects;
         private Root root;
@@ -357,9 +357,9 @@ namespace BehaviorDesigner
             detachedTasks.Clear();
         }
 
-        public int NewTaskGuid()
+        public int NewTaskId()
         {
-            return ++guidCount;
+            return ++taskIdCount;
         }
 
         private void UpdateDetachedTasks(Task task)
