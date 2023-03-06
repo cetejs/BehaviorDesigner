@@ -41,7 +41,7 @@
                     <ui:Label display-tooltip-when-elided="true" name="behavior-name" picking-mode="Ignore" />
                 </BehaviorDesigner.Editor.BehaviorNameView>
                 <BehaviorDesigner.Editor.DescriptionView picking-mode="Ignore" style="flex-grow: 1; flex-direction: column-reverse;">
-                    <ui:Label display-tooltip-when-elided="true" name="description" picking-mode="Ignore" />
+                    <ui:Label display-tooltip-when-elided="true" name="description" picking-mode="Ignore" style="visibility: hidden;" />
                 </BehaviorDesigner.Editor.DescriptionView>
             </BehaviorDesigner.Editor.BehaviorView>
         </ui:VisualElement>
