@@ -48,6 +48,7 @@ namespace BehaviorDesigner.Tasks.Movement
 
         public override void OnStart()
         {
+            base.OnStart();
             agent.speed = speed.Value;
             agent.angularSpeed = angularSpeed.Value;
             agent.isStopped = false;

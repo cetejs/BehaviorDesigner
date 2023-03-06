@@ -12,6 +12,8 @@ namespace BehaviorDesigner
         public Rect graphPosition = new Rect(400f, 300f, 100f, 100f);
         [HideInInspector]
         public string comment;
+        [HideInInspector]
+        public bool breakpoint;
         public Action<TaskStatus> UpdateNotifyOnEditor { get; set; }
 #endif
         [HideInInspector]
@@ -19,7 +21,7 @@ namespace BehaviorDesigner
         private int id;
         [HideInInspector]
         [SerializeField]
-        protected bool isDisabled;
+        protected bool disabled;
         protected GameObject gameObject;
         protected Transform transform;
         protected Behavior owner;
@@ -40,8 +42,8 @@ namespace BehaviorDesigner
 
         public bool IsDisabled
         {
-            get { return isDisabled; }
-            set { isDisabled = value; }
+            get { return disabled; }
+            set { disabled = value; }
         }
 
         public virtual void Bind(IBehavior behavior)
@@ -96,10 +98,6 @@ namespace BehaviorDesigner
         {
         }
 
-        public virtual void OnCollisionStay(Collision collision)
-        {
-        }
-
         public virtual void OnCollisionExit(Collision collision)
         {
         }
@@ -108,19 +106,19 @@ namespace BehaviorDesigner
         {
         }
 
-        public virtual void OnTriggerStay(Collider other)
+        public virtual void OnTriggerExit(Collider other)
+        {
+        }
+        
+        public virtual void OnCollisionEnter2D(Collision2D collision)
         {
         }
 
-        public virtual void OnTriggerExit(Collider other)
+        public virtual void OnCollisionExit2D(Collision2D collision)
         {
         }
 
         public virtual void OnTriggerEnter2D(Collider2D other)
-        {
-        }
-
-        public virtual void OnTriggerStay2D(Collider2D other)
         {
         }
 
@@ -138,6 +136,12 @@ namespace BehaviorDesigner
 
         public virtual void OnStart()
         {
+#if UNITY_EDITOR
+            if (breakpoint)
+            {
+                UnityEditor.EditorApplication.isPaused = true;
+            }
+#endif
         }
 
         public virtual void OnEnd()

@@ -199,16 +199,6 @@ namespace BehaviorDesigner
             Root?.OnCollisionEnter(collision);
         }
 
-        private void OnCollisionStay(Collision collision)
-        {
-            if (!isInit || isCompleted)
-            {
-                return;
-            }
-
-            Root?.OnCollisionStay(collision);
-        }
-
         private void OnCollisionExit(Collision collision)
         {
             if (!isInit || isCompleted)
@@ -229,16 +219,6 @@ namespace BehaviorDesigner
             Root?.OnTriggerEnter(other);
         }
 
-        private void OnTriggerStay(Collider other)
-        {
-            if (!isInit || isCompleted)
-            {
-                return;
-            }
-
-            Root?.OnTriggerStay(other);
-        }
-
         private void OnTriggerExit(Collider other)
         {
             if (!isInit || isCompleted)
@@ -249,6 +229,26 @@ namespace BehaviorDesigner
             Root?.OnTriggerExit(other);
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (!isInit || isCompleted)
+            {
+                return;
+            }
+
+            Root?.OnCollisionEnter2D(collision);
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (!isInit || isCompleted)
+            {
+                return;
+            }
+
+            Root?.OnCollisionExit2D(collision);
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!isInit || isCompleted)
@@ -257,16 +257,6 @@ namespace BehaviorDesigner
             }
 
             Root?.OnTriggerEnter2D(other);
-        }
-
-        private void OnTriggerStay2D(Collider2D other)
-        {
-            if (!isInit || isCompleted)
-            {
-                return;
-            }
-
-            Root?.OnTriggerStay2D(other);
         }
 
         private void OnTriggerExit2D(Collider2D other)

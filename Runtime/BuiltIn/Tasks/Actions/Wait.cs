@@ -17,6 +17,7 @@ namespace BehaviorDesigner.Tasks
 
         public override void OnStart()
         {
+            base.OnStart();
             startTime = Time.time;
             if (isRandomWait.Value)
             {

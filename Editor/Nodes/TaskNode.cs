@@ -18,6 +18,7 @@ namespace BehaviorDesigner.Editor
         private TextField commentInput;
         private Label commentLabel;
         private Rect position;
+        private VisualElement breakpoint;
 
         protected virtual bool IsAddComment { get; }
 
@@ -34,6 +35,7 @@ namespace BehaviorDesigner.Editor
             commentInput.name = "comment-input";
             commentInput.multiline = true;
             commentLabel = this.Q<Label>("comment");
+            breakpoint = this.Q("breakpoint");
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/TaskNode"));
 
             if (disconnectAll == null)
@@ -121,6 +123,7 @@ namespace BehaviorDesigner.Editor
             MarkAsExecuted(task.CurrentStatus);
             SetComment(task.comment);
             commentInput.value = task.comment;
+            breakpoint.visible = task.breakpoint;
             task.UpdateNotifyOnEditor = OnTaskUpdate;
         }
 
@@ -146,7 +149,7 @@ namespace BehaviorDesigner.Editor
             Restore();
             window.Save();
         }
-        
+
         public void OnGUI(VisualElement container)
         {
             container.Clear();
@@ -161,11 +164,6 @@ namespace BehaviorDesigner.Editor
             {
                 container.Add(resolver.EditorField);
             }
-        }
-
-        public override void OnSelected()
-        {
-            base.OnSelected();
         }
 
         public override void SetPosition(Rect newPos)
@@ -187,7 +185,7 @@ namespace BehaviorDesigner.Editor
             string setEnableAction = task.IsDisabled ? "Set Enable" : "Set Disable";
             evt.menu.AppendAction(setEnableAction, action =>
             {
-                window.RegisterUndo("DisconnectAll TaskNode");
+                window.RegisterUndo($"{setEnableAction} TaskNode");
                 task.IsDisabled = !task.IsDisabled;
                 MarkAsExecuted(task.CurrentStatus);
                 window.Save();
@@ -197,7 +195,10 @@ namespace BehaviorDesigner.Editor
                 window.RegisterUndo("DisconnectAll TaskNode");
                 disconnectAll.Invoke(this, new object[] {action});
                 window.Save();
-            }, callback => { return (DropdownMenuAction.Status) disconnectAllStatus.Invoke(this, new object[] {callback}); });
+            }, callback =>
+            {
+                return (DropdownMenuAction.Status) disconnectAllStatus.Invoke(this, new object[] {callback});
+            });
             evt.menu.AppendSeparator();
         }
 
@@ -220,7 +221,7 @@ namespace BehaviorDesigner.Editor
             RemoveFromClassList("running");
             RemoveFromClassList("failure");
             RemoveFromClassList("success");
-            
+
             if (task.IsDisabled)
             {
                 AddToClassList("disable");
@@ -265,15 +266,33 @@ namespace BehaviorDesigner.Editor
             }, callback => DropdownMenuAction.Status.Normal);
         }
 
+        protected void AddBreakpointMenuItem(ContextualMenuPopulateEvent evt)
+        {
+            string setBreakpointAction = !task.breakpoint ? "Set Breakpoint" : "Remove Breakpoint";
+            evt.menu.AppendAction(setBreakpointAction, action =>
+            {
+                window.RegisterUndo($"{setBreakpointAction} TaskNode");
+                task.breakpoint = !task.breakpoint;
+                breakpoint.visible = task.breakpoint;
+                window.Save();
+            }, callback => DropdownMenuAction.Status.Normal);
+        }
+
         private void AddParent()
         {
             parentPort = TaskPort.Create<Edge>(Direction.Input, Port.Capacity.Single, typeof(Port));
             parentPort.portName = "";
             inputContainer.Add(parentPort);
 
-            parentPort.onConnected = (edge, isManual) => { parentNode = edge.output.node as ParentTaskNode; };
+            parentPort.onConnected = (edge, isManual) =>
+            {
+                parentNode = edge.output.node as ParentTaskNode;
+            };
 
-            parentPort.onDisconnected = (port, isManual) => { parentNode = null; };
+            parentPort.onDisconnected = (port, isManual) =>
+            {
+                parentNode = null;
+            };
         }
 
         private void AddComment()

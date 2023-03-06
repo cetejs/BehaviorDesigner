@@ -12,6 +12,7 @@ namespace BehaviorDesigner.Tasks.UnityBehaviour
 
         public override void OnStart()
         {
+            base.OnStart();
             behaviour.Value.enabled = true;
         }
     }

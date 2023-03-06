@@ -18,6 +18,7 @@ namespace BehaviorDesigner.Tasks
 
         public override void OnStart()
         {
+            base.OnStart();
             isChildrenRunning = false;
             runningTasks.Clear();
             runningTasks.AddRange(children);

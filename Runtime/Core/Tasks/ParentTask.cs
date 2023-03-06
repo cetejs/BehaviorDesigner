@@ -89,6 +89,7 @@ namespace BehaviorDesigner
 
         public override void OnStart()
         {
+            base.OnStart();
             lastChildIndex = -1;
             currentChildIndex = 0;
         }
@@ -165,17 +166,6 @@ namespace BehaviorDesigner
             }
         }
 
-        public override void OnCollisionStay(Collision collision)
-        {
-            foreach (Task child in children)
-            {
-                if (!child.IsDisabled)
-                {
-                    child.OnCollisionStay(collision);
-                }
-            }
-        }
-
         public override void OnCollisionExit(Collision collision)
         {
             foreach (Task child in children)
@@ -198,17 +188,6 @@ namespace BehaviorDesigner
             }
         }
 
-        public override void OnTriggerStay(Collider other)
-        {
-            foreach (Task child in children)
-            {
-                if (!child.IsDisabled)
-                {
-                    child.OnTriggerStay(other);
-                }
-            }
-        }
-
         public override void OnTriggerExit(Collider other)
         {
             foreach (Task child in children)
@@ -216,6 +195,28 @@ namespace BehaviorDesigner
                 if (!child.IsDisabled)
                 {
                     child.OnTriggerExit(other);
+                }
+            }
+        }
+        
+        public override void OnCollisionEnter2D(Collision2D collision)
+        {
+            foreach (Task child in children)
+            {
+                if (!child.IsDisabled)
+                {
+                    child.OnCollisionEnter2D(collision);
+                }
+            }
+        }
+
+        public override void OnCollisionExit2D(Collision2D collision)
+        {
+            foreach (Task child in children)
+            {
+                if (!child.IsDisabled)
+                {
+                    child.OnCollisionExit2D(collision);
                 }
             }
         }
@@ -227,17 +228,6 @@ namespace BehaviorDesigner
                 if (!child.IsDisabled)
                 {
                     child.OnTriggerEnter2D(other);
-                }
-            }
-        }
-
-        public override void OnTriggerStay2D(Collider2D other)
-        {
-            foreach (Task child in children)
-            {
-                if (!child.IsDisabled)
-                {
-                    child.OnTriggerStay2D(other);
                 }
             }
         }

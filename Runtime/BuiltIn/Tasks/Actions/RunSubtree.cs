@@ -18,6 +18,7 @@ namespace BehaviorDesigner.Tasks
 
         public override void OnStart()
         {
+            base.OnStart();
             source = behavior.Source;
             if (!isRestart)
             {
