@@ -27,6 +27,8 @@ namespace BehaviorDesigner.Editor
         private int selectedIndex = -1;
         private bool isManualSelect;
 
+        public event System.Action onDataChanged; 
+
         public IBehavior Behavior
         {
             get { return behavior; }
@@ -116,6 +118,7 @@ namespace BehaviorDesigner.Editor
             behaviorView = null;
             inspectorView = null;
             variablesView = null;
+            onDataChanged = null;
             behaviorId = -1;
             behaviorFileId = -1;
             serializeVersion = -1;
@@ -235,6 +238,7 @@ namespace BehaviorDesigner.Editor
             }
 
             Save(behavior);
+            onDataChanged?.Invoke();
         }
 
         private void Save(IBehavior behavior)
