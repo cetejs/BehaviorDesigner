@@ -19,6 +19,8 @@ namespace BehaviorDesigner.Tasks.Movement
         [SerializeField]
         private SharedFloat viewDistance = 10f;
         [SerializeField]
+        private SharedFloat viewVolume = 1f;
+        [SerializeField]
         private SharedFloat angleOffset;
         [SerializeField]
         private SharedVector3 viewOffset;
@@ -65,9 +67,10 @@ namespace BehaviorDesigner.Tasks.Movement
                 }
 
                 Vector3 direction = hitTransform.position - transform.position;
-                float angle = Vector3.Angle(transform.forward, direction);
+                Vector3 forward = Quaternion.AngleAxis(angleOffset.Value, Vector3.up) * transform.forward;
+                float angle = Vector3.Angle(forward, direction);
                 float distance = direction.sqrMagnitude;
-                if (angle > fieldOfView.Value / 2f)
+                if (angle > fieldOfView.Value / 2f && distance > viewVolume.Value)
                 {
                     continue;
                 }
@@ -119,6 +122,7 @@ namespace BehaviorDesigner.Tasks.Movement
             obstacleLayerMask = 0;
             fieldOfView = 60f;
             viewDistance = 10f;
+            viewVolume = 1f;
             angleOffset = 0f;
             viewOffset = Vector3.zero;
             isDrawGizmos = true;
