@@ -5,16 +5,16 @@ namespace BehaviorDesigner.Tasks.Movement
 {
     public abstract class NavMeshMovement : Movement
     {
-        [SerializeField]
+        [SerializeField] [FieldPriority(1)]
         protected SharedFloat speed = 10f;
-        [SerializeField]
+        [SerializeField] [FieldPriority(2)]
         protected SharedFloat angularSpeed = 120f;
-        [SerializeField]
+        [SerializeField] [FieldPriority(3)]
         protected SharedFloat arriveDistance = 0.1f;
-        [SerializeField]
-        protected SharedBool isStopOnTaskEnd = true;
-        [SerializeField]
-        protected SharedBool isUpdateRotation = true;
+        [SerializeField] [FieldPriority(4)]
+        protected SharedBool stopOnTaskEnd = true;
+        [SerializeField] [FieldPriority(5)]
+        protected SharedBool updateRotation = true;
 
         protected NavMeshAgent agent;
 
@@ -52,12 +52,12 @@ namespace BehaviorDesigner.Tasks.Movement
             agent.speed = speed.Value;
             agent.angularSpeed = angularSpeed.Value;
             agent.isStopped = false;
-            UpdateRotation(isUpdateRotation.Value);
+            UpdateRotation(updateRotation.Value);
         }
 
         public override void OnEnd()
         {
-            if (isStopOnTaskEnd.Value)
+            if (stopOnTaskEnd.Value)
             {
                 Stop();
             }
@@ -87,8 +87,8 @@ namespace BehaviorDesigner.Tasks.Movement
             speed = 10f;
             angularSpeed = 120f;
             arriveDistance = 0.1f;
-            isStopOnTaskEnd = true;
-            isUpdateRotation = true;
+            stopOnTaskEnd = true;
+            updateRotation = true;
         }
     }
 }

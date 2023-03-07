@@ -9,9 +9,9 @@ namespace BehaviorDesigner.Tasks
         [SerializeField]
         private SharedInt count = 1;
         [SerializeField]
-        private SharedBool isRepeatForever;
+        private SharedBool repeatForever;
         [SerializeField]
-        private SharedBool isEndOnFailure;
+        private SharedBool endOnFailure;
 
         private int executionCount;
         private TaskStatus executionStatus;
@@ -22,7 +22,7 @@ namespace BehaviorDesigner.Tasks
             {
                 case TaskStatus.Failure:
                     executionCount++;
-                    if (isEndOnFailure.Value)
+                    if (endOnFailure.Value)
                     {
                         return status;
                     }
@@ -34,7 +34,7 @@ namespace BehaviorDesigner.Tasks
                     return status;
             }
             
-            if (isRepeatForever.Value || count.Value > executionCount)
+            if (repeatForever.Value || count.Value > executionCount)
             {
                 lastChildIndex = -1;
                 return TaskStatus.Running;
@@ -46,8 +46,8 @@ namespace BehaviorDesigner.Tasks
         public override void OnReset()
         {
             count = 1;
-            isRepeatForever = false;
-            isEndOnFailure = false;
+            repeatForever = false;
+            endOnFailure = false;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BehaviorDesigner.Tasks.Movement
         [SerializeField]
         private SharedFloat rotationEpsilon = 0.1f;
         [SerializeField]
-        private SharedBool isOnlyY;
+        private SharedBool onlyY;
         [SerializeField]
         private SharedTransform target;
         [SerializeField]
@@ -30,7 +30,7 @@ namespace BehaviorDesigner.Tasks.Movement
                         return transform.rotation;
                     }
 
-                    if (isOnlyY.Value)
+                    if (onlyY.Value)
                     {
                         direction.y = 0f;
                     }
@@ -57,7 +57,7 @@ namespace BehaviorDesigner.Tasks.Movement
         {
             speed = 120f;
             rotationEpsilon = 0.1f;
-            isOnlyY = false;
+            onlyY = false;
             target = null;
             targetRotation = Vector3.zero;
         }

@@ -4,7 +4,7 @@ namespace BehaviorDesigner.Tasks.Movement
 {
     [TaskDescription("Check to see if the any objects are within sight of the agent.")]
     [TaskCategory("Movement")]
-    public class CanSeeObject : Conditional
+    public class CanSeeObject : IntervalConditional
     {
         [SerializeField]
         private Optimization optimization;
@@ -27,13 +27,13 @@ namespace BehaviorDesigner.Tasks.Movement
         [SerializeField]
         private SharedTransform storeResult;
         [SerializeField]
-        private bool isDrawGizmos = true;
+        private bool drawGizmos = true;
         [SerializeField]
         private Color viewColor = new Color(1f, 0.92f, 0.016f, 0.1f);
 
         private readonly Collider[] hitColliders = new Collider[10];
 
-        public override TaskStatus OnUpdate()
+        public override TaskStatus OnConditionalUpdate()
         {
             float minAngle = float.MaxValue;
             float minDistance = float.MaxValue;
@@ -101,7 +101,7 @@ namespace BehaviorDesigner.Tasks.Movement
         public override void OnDrawGizmos()
         {
 #if UNITY_EDITOR
-            if (!isDrawGizmos)
+            if (!drawGizmos)
             {
                 return;
             }
@@ -117,6 +117,7 @@ namespace BehaviorDesigner.Tasks.Movement
 
         public override void OnReset()
         {
+            base.OnReset();
             tag = Tag.Untagged;
             objectLayerMask = 1 << LayerMask.NameToLayer("Default");
             obstacleLayerMask = 0;
@@ -125,7 +126,7 @@ namespace BehaviorDesigner.Tasks.Movement
             viewVolume = 1f;
             angleOffset = 0f;
             viewOffset = Vector3.zero;
-            isDrawGizmos = true;
+            drawGizmos = true;
             viewColor = new Color(1f, 0.92f, 0.016f, 0.1f);
         }
         

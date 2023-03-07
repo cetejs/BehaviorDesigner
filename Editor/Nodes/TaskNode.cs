@@ -22,7 +22,7 @@ namespace BehaviorDesigner.Editor
 
         protected virtual bool IsAddComment { get; }
 
-        private readonly List<IFieldResolver> resolvers = new List<IFieldResolver>();
+        private readonly List<PriorityResolver> priorityResolvers = new List<PriorityResolver>();
 
         private static MethodInfo disconnectAll;
         private static MethodInfo disconnectAllStatus;
@@ -84,7 +84,7 @@ namespace BehaviorDesigner.Editor
 
         public virtual void Restore()
         {
-            resolvers.Clear();
+            priorityResolvers.Clear();
             Type type = task.GetType();
             FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (FieldInfo field in fields)
@@ -107,7 +107,24 @@ namespace BehaviorDesigner.Editor
                 IFieldResolver resolver = window.CreateField(field);
                 resolver.Register();
                 resolver.Restore(task);
-                resolvers.Add(resolver);
+                
+                FieldPriorityAttribute priorityAttribute = field.GetCustomAttribute<FieldPriorityAttribute>();
+                int priority = priorityAttribute == null ? int.MaxValue : priorityAttribute.priority;
+                int index = 0;
+                for (int i = priorityResolvers.Count - 1; i >= 0; i--)
+                {
+                    if (priority >= priorityResolvers[i].priority)
+                    {
+                        index = i + 1;
+                        break;
+                    }
+                }
+
+                priorityResolvers.Insert(index, new PriorityResolver()
+                {
+                    priority = priority,
+                    resolver = resolver
+                });
             }
 
             TaskNameAttribute attribute = type.GetCustomAttribute<TaskNameAttribute>();
@@ -131,9 +148,9 @@ namespace BehaviorDesigner.Editor
         {
             task.comment = commentInput.value;
             task.graphPosition = position;
-            foreach (IFieldResolver resolver in resolvers)
+            foreach (PriorityResolver priorityResolver in priorityResolvers)
             {
-                resolver.Save(task);
+                priorityResolver.resolver.Save(task);
             }
         }
 
@@ -160,9 +177,9 @@ namespace BehaviorDesigner.Editor
                 container.Add(commentInput);
             }
 
-            foreach (IFieldResolver resolver in resolvers)
+            foreach (PriorityResolver priorityResolver in priorityResolvers)
             {
-                container.Add(resolver.EditorField);
+                container.Add(priorityResolver.resolver.EditorField);
             }
         }
 
@@ -206,9 +223,9 @@ namespace BehaviorDesigner.Editor
         {
             if (selected)
             {
-                foreach (IFieldResolver resolver in resolvers)
+                foreach (PriorityResolver priorityResolver in priorityResolvers)
                 {
-                    resolver.Restore(task);
+                    priorityResolver.resolver.Restore(task);
                 }
             }
 
@@ -317,6 +334,12 @@ namespace BehaviorDesigner.Editor
             {
                 commentLabel.style.display = DisplayStyle.Flex;
             }
+        }
+        
+        private struct PriorityResolver
+        {
+            public int priority;
+            public IFieldResolver resolver;
         }
     }
 }

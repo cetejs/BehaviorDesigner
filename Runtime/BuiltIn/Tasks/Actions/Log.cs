@@ -6,13 +6,13 @@ namespace BehaviorDesigner.Tasks
     public class Log : Action
     {
         [SerializeField]
-        private SharedBool isLogError;
+        private SharedBool logError;
         [SerializeField]
         private SharedString logText;
 
         public override TaskStatus OnUpdate()
         {
-            if (isLogError.Value)
+            if (logError.Value)
             {
                 Debug.LogError(logText.Value);
             }
@@ -26,7 +26,7 @@ namespace BehaviorDesigner.Tasks
 
         public override void OnReset()
         {
-            isLogError = false;
+            logError = false;
             logText = null;
         }
     }

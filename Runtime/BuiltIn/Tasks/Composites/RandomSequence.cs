@@ -14,7 +14,7 @@ namespace BehaviorDesigner.Tasks
         [SerializeField]
         private int seed;
         [SerializeField]
-        private bool isUseSeed;
+        private bool useSeed;
 
         private List<int> childIndexList;
         private List<int> executedIndexList;
@@ -29,7 +29,7 @@ namespace BehaviorDesigner.Tasks
         public override void OnStart()
         {
             base.OnStart();
-            if (isUseSeed)
+            if (useSeed)
             {
                 random = new System.Random(seed);
             }
@@ -120,7 +120,7 @@ namespace BehaviorDesigner.Tasks
         public override void OnReset()
         {
             seed = 0;
-            isUseSeed = false;
+            useSeed = false;
         }
 
         private int RandomNext()

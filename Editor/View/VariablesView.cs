@@ -249,8 +249,7 @@ namespace BehaviorDesigner.Editor
 
                     VariablePriorityAttribute attribute = type.GetCustomAttribute<VariablePriorityAttribute>();
                     int priority = attribute == null ? 0 : attribute.priority;
-
-                    int index = sharedVariableTypes.Count;
+                    int index = 0;
                     for (int i = sharedVariableTypes.Count - 1; i >= 0; i--)
                     {
                         if (priority >= sharedVariableTypes[i].priority)

@@ -14,7 +14,7 @@ namespace BehaviorDesigner.Tasks.Movement
         [SerializeField]
         private SharedFloat arriveDistance = 0.1f;
         [SerializeField]
-        private SharedBool isLookAtTarget = true;
+        private SharedBool lookAtTarget = true;
         [SerializeField]
         private SharedTransform target;
         [SerializeField]
@@ -43,7 +43,7 @@ namespace BehaviorDesigner.Tasks.Movement
             }
 
             transform.position = Vector3.MoveTowards(transform.position, Target, speed.Value * Time.deltaTime);
-            if (isLookAtTarget.Value && direction.sqrMagnitude > 0.01f)
+            if (lookAtTarget.Value && direction.sqrMagnitude > 0.01f)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction),  angularSpeed.Value * Time.deltaTime);
             }
@@ -56,7 +56,7 @@ namespace BehaviorDesigner.Tasks.Movement
             speed = 10f;
             angularSpeed = 120f;
             arriveDistance = 0.1f;
-            isLookAtTarget = true;
+            lookAtTarget = true;
             target = null;
             targetPosition = Vector3.zero;
         }
