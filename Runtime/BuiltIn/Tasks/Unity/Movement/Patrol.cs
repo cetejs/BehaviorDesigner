@@ -7,15 +7,17 @@ namespace BehaviorDesigner.Tasks.Movement
     public class Patrol : NavMeshMovement
     {
         [SerializeField]
-        private SharedBool isRandomPatrol;
+        private SharedBool randomPatrol;
         [SerializeField]
-        private SharedBool isReversePatrol;
+        private SharedBool reversePatrol;
+        [SerializeField]
+        private SharedBool findNearestWaypoint;
         [SerializeField]
         private SharedFloat waypointPauseDuration = 1f;
         [SerializeField]
         private SharedTransformList waypoints;
 
-        private int waypointIndex;
+        private int waypointIndex = -1;
         private float waypointPauseTime;
 
         private Vector3 Target
@@ -35,15 +37,18 @@ namespace BehaviorDesigner.Tasks.Movement
         {
             base.OnStart();
             float minDistance = float.MaxValue;
-            for (int i = 0; i < waypoints.Value.Count; i++)
+            if (waypointIndex < 0 || findNearestWaypoint.Value)
             {
-                Transform waypoint = waypoints.Value[i];
-                float sqrDistance = (transform.position - waypoint.position).sqrMagnitude;
-                if (sqrDistance < minDistance  )
+                for (int i = 0; i < waypoints.Value.Count; i++)
                 {
-                    minDistance = sqrDistance;
-                    waypointIndex = i;
-                }   
+                    Transform waypoint = waypoints.Value[i];
+                    float sqrDistance = (transform.position - waypoint.position).sqrMagnitude;
+                    if (sqrDistance < minDistance  )
+                    {
+                        minDistance = sqrDistance;
+                        waypointIndex = i;
+                    }   
+                }
             }
 
             waypointPauseTime = -1f;
@@ -68,7 +73,7 @@ namespace BehaviorDesigner.Tasks.Movement
                 {
                     waypointPauseTime = -1f;
                     int nextIndex;
-                    if (isRandomPatrol.Value)
+                    if (randomPatrol.Value)
                     {
                         int randomIndex = Random.Range(0, waypoints.Value.Count);
                         if (randomIndex == waypointIndex)
@@ -102,7 +107,7 @@ namespace BehaviorDesigner.Tasks.Movement
 
         private int NextIndex(int index)
         {
-            index += isReversePatrol.Value ? -1 : 1;
+            index += reversePatrol.Value ? -1 : 1;
 
             if (index >= waypoints.Value.Count)
             {
@@ -124,7 +129,7 @@ namespace BehaviorDesigner.Tasks.Movement
                 Transform waypoint = waypoints.Value[i];
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(waypoint.position, 0.5f);
-                if (!isRandomPatrol.Value)
+                if (!randomPatrol.Value)
                 {
                     Gizmos.color = Color.green;
                     Transform nextWaypoint = waypoints.Value[NextIndex(i)];
@@ -138,7 +143,7 @@ namespace BehaviorDesigner.Tasks.Movement
         public override void OnReset()
         {
             base.OnReset();
-            isRandomPatrol = false;
+            randomPatrol = false;
             waypointPauseDuration = 1f;
             waypoints = null;
         }
