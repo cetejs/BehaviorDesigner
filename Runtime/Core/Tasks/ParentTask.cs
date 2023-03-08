@@ -75,18 +75,6 @@ namespace BehaviorDesigner
             }
         }
 
-        public sealed override void Restart()
-        {
-            base.Restart();
-            foreach (Task child in children)
-            {
-                if (!child.IsDisabled)
-                {
-                    child.Restart();
-                }
-            }
-        }
-
         public override void OnStart()
         {
             base.OnStart();

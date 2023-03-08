@@ -6,10 +6,5 @@
         {
             base.Bind(behavior);
         }
-        
-        public sealed override void Restart()
-        {
-            base.Restart();
-        }
     }
 }

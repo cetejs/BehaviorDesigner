@@ -59,11 +59,6 @@ namespace BehaviorDesigner
             OnAwake();
         }
 
-        public virtual void Restart()
-        {
-            OnStart();
-        }
-
         public virtual void OnAwake()
         {
         }

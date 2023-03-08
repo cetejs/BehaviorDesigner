@@ -14,6 +14,18 @@ namespace BehaviorDesigner
             get { return abortType; }
         }
 
+        public void Restart()
+        {
+            OnStart();
+            foreach (Task child in children)
+            {
+                if (!child.IsDisabled && child is Composite composite)
+                {
+                    composite.Restart();
+                }
+            }
+        }
+
         public override bool UpdateAbort()
         {
             int count = CanRunParallelChildren ? children.Count : currentChildIndex;

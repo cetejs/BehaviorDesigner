@@ -10,10 +10,15 @@ namespace BehaviorDesigner.Tasks.UnityBehaviour
         [SerializeField]
         private SharedBehaviour behaviour;
 
-        public override void OnStart()
+        public override TaskStatus OnUpdate()
         {
-            base.OnStart();
             behaviour.Value.enabled = true;
+            return TaskStatus.Success;
+        }
+
+        public override void OnReset()
+        {
+            behaviour = null;
         }
     }
 }
