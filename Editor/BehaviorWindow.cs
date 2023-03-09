@@ -50,6 +50,15 @@ namespace BehaviorDesigner.Editor
             get { return behaviorFileId; }
         }
 
+        [RuntimeInitializeOnLoadMethod]
+        private static void EnterPlayerMode()
+        {
+            if (HasOpenInstances<BehaviorWindow>())
+            {
+                GetWindow<BehaviorWindow>().Refresh();
+            }
+        }
+
         [MenuItem("Window/Behavior Designer")]
         public static void ShowWindow()
         {
@@ -335,8 +344,10 @@ namespace BehaviorDesigner.Editor
         {
             switch (state)
             {
+                case UnityEditor.PlayModeStateChange.EnteredPlayMode:
+                    isManualSelect = false;
+                    break;
                 case UnityEditor.PlayModeStateChange.EnteredEditMode:
-                case UnityEditor.PlayModeStateChange.ExitingEditMode:
                     Refresh();
                     break;
             }
