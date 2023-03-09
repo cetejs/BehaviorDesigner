@@ -21,21 +21,13 @@ namespace BehaviorDesigner.Editor
         public override void Init(Task task, BehaviorWindow window)
         {
             base.Init(task, window);
-            window.onDataChanged += UpdateAbortType;
+            window.onSave += UpdateAbortType;
         }
 
         public override void Restore()
         {
             base.Restore();
             UpdateAbortType();
-        }
-
-        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
-        {
-            AddScriptMenuItem(evt);
-            AddBreakpointMenuItem(evt);
-            AddReplaceMenuItem(evt);
-            base.BuildContextualMenu(evt);
         }
 
         private void UpdateAbortType()

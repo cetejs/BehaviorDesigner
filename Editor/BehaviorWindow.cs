@@ -27,7 +27,8 @@ namespace BehaviorDesigner.Editor
         private int selectedIndex = -1;
         private bool isManualSelect;
 
-        public event System.Action onDataChanged; 
+        public event System.Action onSave;
+        public event System.Action onUpdate;
 
         public IBehavior Behavior
         {
@@ -118,7 +119,8 @@ namespace BehaviorDesigner.Editor
             behaviorView = null;
             inspectorView = null;
             variablesView = null;
-            onDataChanged = null;
+            onSave = null;
+            onUpdate = null;
             behaviorId = -1;
             behaviorFileId = -1;
             serializeVersion = -1;
@@ -223,6 +225,8 @@ namespace BehaviorDesigner.Editor
 
         private void Restore()
         {
+            onSave = null;
+            onUpdate = null;
             Source.Load();
             behaviorView.Restore();
             inspectorView.Restore();
@@ -234,11 +238,12 @@ namespace BehaviorDesigner.Editor
             if (Application.isPlaying)
             {
                 behaviorView.Save();
+                onSave?.Invoke();
                 return;
             }
 
             Save(behavior);
-            onDataChanged?.Invoke();
+            onSave?.Invoke();
         }
 
         private void Save(IBehavior behavior)
@@ -330,8 +335,8 @@ namespace BehaviorDesigner.Editor
         {
             switch (state)
             {
-                case UnityEditor.PlayModeStateChange.EnteredPlayMode:
                 case UnityEditor.PlayModeStateChange.EnteredEditMode:
+                case UnityEditor.PlayModeStateChange.ExitingEditMode:
                     Refresh();
                     break;
             }
@@ -354,6 +359,7 @@ namespace BehaviorDesigner.Editor
 
         private void Update()
         {
+            onUpdate?.Invoke();
             variablesView?.Update();
             descriptionView?.DoDraw();
             inspectorView?.DoDraw();

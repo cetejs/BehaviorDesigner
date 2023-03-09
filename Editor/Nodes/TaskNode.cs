@@ -19,6 +19,13 @@ namespace BehaviorDesigner.Editor
         private Label commentLabel;
         private Rect position;
         private VisualElement breakpoint;
+        private VisualElement statusIcon;
+        private VisualElement nodeBorder;
+
+        private static readonly float ColorLerpSpeed = 2f;
+        private static readonly Color DefaultColor = new Color(0.2f, 0.2f, 0.2f);
+        private static readonly Color DisableColor = new Color(0.5f, 0.5f, 0.5f);
+        private static readonly Color RunningColor = new Color(0.2f, 0.55f, 0.25f);
 
         protected virtual bool IsAddComment { get; }
 
@@ -34,8 +41,10 @@ namespace BehaviorDesigner.Editor
             commentInput = new TextField("Comment");
             commentInput.name = "comment-input";
             commentInput.multiline = true;
-            commentLabel = this.Q<Label>("comment");
+            commentLabel = this.Q<Label>("comment-label");
             breakpoint = this.Q("breakpoint");
+            statusIcon = this.Q("status");
+            nodeBorder = this.Q("node-border");
             styleSheets.Add(BehaviorUtils.Load<StyleSheet>("Styles/TaskNode"));
 
             if (disconnectAll == null)
@@ -73,6 +82,7 @@ namespace BehaviorDesigner.Editor
         {
             this.task = task;
             this.window = window;
+            window.onUpdate += Update;
             AddParent();
         }
 
@@ -107,7 +117,7 @@ namespace BehaviorDesigner.Editor
                 IFieldResolver resolver = window.CreateField(field);
                 resolver.Register();
                 resolver.Restore(task);
-                
+
                 FieldPriorityAttribute priorityAttribute = field.GetCustomAttribute<FieldPriorityAttribute>();
                 int priority = priorityAttribute == null ? int.MaxValue : priorityAttribute.priority;
                 int index = 0;
@@ -137,7 +147,8 @@ namespace BehaviorDesigner.Editor
                 title = ObjectNames.NicifyVariableName(type.Name);
             }
 
-            MarkAsExecuted(task.CurrentStatus);
+            UpdateDisableStatus();
+            OnTaskUpdate(task.CurrentStatus, true);
             SetComment(task.comment);
             commentInput.value = task.comment;
             breakpoint.visible = task.breakpoint;
@@ -199,14 +210,34 @@ namespace BehaviorDesigner.Editor
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
+            AddScriptMenuItem(evt);
+
+            evt.menu.AppendAction("Replace", action =>
+            {
+                Vector2 pos = window.position.position + action.eventInfo.mousePosition;
+                ReplaceMenuWindowProvider provider = ScriptableObject.CreateInstance<ReplaceMenuWindowProvider>();
+                provider.Init(window, this);
+                SearchWindow.Open(new SearchWindowContext(pos), provider);
+            }, callback => DropdownMenuAction.Status.Normal);
+
+            string setBreakpointAction = !task.breakpoint ? "Set Breakpoint" : "Remove Breakpoint";
+            evt.menu.AppendAction(setBreakpointAction, action =>
+            {
+                window.RegisterUndo($"{setBreakpointAction} TaskNode");
+                task.breakpoint = !task.breakpoint;
+                breakpoint.visible = task.breakpoint;
+                window.Save();
+            }, callback => DropdownMenuAction.Status.Normal);
+
             string setEnableAction = task.IsDisabled ? "Set Enable" : "Set Disable";
             evt.menu.AppendAction(setEnableAction, action =>
             {
                 window.RegisterUndo($"{setEnableAction} TaskNode");
                 task.IsDisabled = !task.IsDisabled;
-                MarkAsExecuted(task.CurrentStatus);
+                UpdateDisableStatus();
                 window.Save();
             }, callback => DropdownMenuAction.Status.Normal);
+
             evt.menu.AppendAction("Disconnect all", action =>
             {
                 window.RegisterUndo("DisconnectAll TaskNode");
@@ -219,7 +250,7 @@ namespace BehaviorDesigner.Editor
             evt.menu.AppendSeparator();
         }
 
-        protected virtual void OnTaskUpdate(TaskStatus status)
+        protected void OnTaskUpdate(TaskStatus status, bool isUpdateAbort)
         {
             if (selected)
             {
@@ -229,33 +260,30 @@ namespace BehaviorDesigner.Editor
                 }
             }
 
-            MarkAsExecuted(status);
-        }
-
-        protected virtual void MarkAsExecuted(TaskStatus status)
-        {
-            RemoveFromClassList("disable");
-            RemoveFromClassList("running");
-            RemoveFromClassList("failure");
-            RemoveFromClassList("success");
-
-            if (task.IsDisabled)
+            if (!isUpdateAbort && status != TaskStatus.Inactive)
             {
-                AddToClassList("disable");
-                return;
+                nodeBorder.style.backgroundColor = RunningColor;
             }
 
+            string iconName = null;
             switch (status)
             {
-                case TaskStatus.Failure:
-                    AddToClassList("failure");
-                    break;
-                case TaskStatus.Running:
-                    AddToClassList("running");
-                    break;
                 case TaskStatus.Success:
-                    AddToClassList("success");
+                    iconName = isUpdateAbort ? "ExecutionSuccessRepeat" : "ExecutionSuccess";
                     break;
+                case TaskStatus.Failure:
+                    iconName = isUpdateAbort ? "ExecutionFailureRepeat" : "ExecutionFailure";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(iconName))
+            {
+                statusIcon.visible = true;
+                statusIcon.style.backgroundImage = BehaviorUtils.Load<Texture2D>($"Icons/{iconName}");
+            }
+            else
+            {
+                statusIcon.visible = false;
             }
         }
 
@@ -272,27 +300,28 @@ namespace BehaviorDesigner.Editor
             evt.menu.AppendSeparator();
         }
 
-        protected void AddReplaceMenuItem(ContextualMenuPopulateEvent evt)
+        protected void Update()
         {
-            evt.menu.AppendAction("Replace", action =>
+            if (task.IsDisabled)
             {
-                Vector2 pos = window.position.position + action.eventInfo.mousePosition;
-                ReplaceMenuWindowProvider provider = ScriptableObject.CreateInstance<ReplaceMenuWindowProvider>();
-                provider.Init(window, this);
-                SearchWindow.Open(new SearchWindowContext(pos), provider);
-            }, callback => DropdownMenuAction.Status.Normal);
+                return;
+            }
+
+            Color color = nodeBorder.style.backgroundColor.value;
+
+            nodeBorder.style.backgroundColor = Color.LerpUnclamped(color, DefaultColor, Time.deltaTime * ColorLerpSpeed);
         }
 
-        protected void AddBreakpointMenuItem(ContextualMenuPopulateEvent evt)
+        private void UpdateDisableStatus()
         {
-            string setBreakpointAction = !task.breakpoint ? "Set Breakpoint" : "Remove Breakpoint";
-            evt.menu.AppendAction(setBreakpointAction, action =>
+            if (task.IsDisabled)
             {
-                window.RegisterUndo($"{setBreakpointAction} TaskNode");
-                task.breakpoint = !task.breakpoint;
-                breakpoint.visible = task.breakpoint;
-                window.Save();
-            }, callback => DropdownMenuAction.Status.Normal);
+                nodeBorder.style.backgroundColor = DisableColor;
+            }
+            else
+            {
+                nodeBorder.style.backgroundColor = DefaultColor;
+            }
         }
 
         private void AddParent()
@@ -328,14 +357,14 @@ namespace BehaviorDesigner.Editor
             commentLabel.text = text;
             if (string.IsNullOrEmpty(text))
             {
-                commentLabel.style.display = DisplayStyle.None;
+                commentLabel.parent.style.display = DisplayStyle.None;
             }
             else
             {
-                commentLabel.style.display = DisplayStyle.Flex;
+                commentLabel.parent.style.display = DisplayStyle.Flex;
             }
         }
-        
+
         private struct PriorityResolver
         {
             public int priority;

@@ -91,7 +91,6 @@
     font-size: 12px;
     -unity-text-align: middle-center;
     white-space: normal;
-    background-color: rgba(42, 42, 42, 1);
 }
 
 #divider {
@@ -112,7 +111,6 @@ CompositeNode #input {
     background-color: rgb(129, 178, 20);
 }
 
-/*Change To C#*/
 ConditionalNode #input {
     background-color: rgb(255, 204, 41);
 }
@@ -133,22 +131,6 @@ DecoratorNode #input {
     border-bottom-right-radius: 5px;
 }
 
-.disable #node-border {
-    background-color: rgb(125, 125, 125);
-}
-
-.running #node-border {
-    background-color: rgb(59, 141, 66);
-}
-
-.success #node-border {
-    background-color: rgb(17, 60, 252);
-}
-
-.failure #node-border {
-    background-color: rgb(207, 10, 10);
-}
-
 #abort-type {
     top: 4px;
     left: 2px;
@@ -162,4 +144,11 @@ DecoratorNode #input {
     right: 2px;
     width: 16px;
     height: 16px;
+}
+
+#status {
+    bottom: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
 }

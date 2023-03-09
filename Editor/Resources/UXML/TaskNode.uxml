@@ -15,10 +15,14 @@
                             <ui:VisualElement name="icon" />
                         </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:Label display-tooltip-when-elided="true" name="comment" />
+                    <ui:VisualElement name="comment">
+                        <ui:VisualElement name="divider" class="horizontal" />
+                        <ui:Label display-tooltip-when-elided="true" name="comment-label" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="divider" class="horizontal" />
                 <ui:VisualElement name="output" />
+                <ui:VisualElement name="status" style="position: absolute; visibility: hidden;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

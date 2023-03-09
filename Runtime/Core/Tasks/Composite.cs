@@ -69,7 +69,7 @@ namespace BehaviorDesigner
                 if (task is Conditional conditional)
                 {
                     TaskStatus status = conditional.CurrentStatus;
-                    if (status != conditional.Update())
+                    if (status != conditional.Update(true))
                     {
                         return true;
                     }

@@ -9,6 +9,7 @@ namespace BehaviorDesigner.Editor
         {
             this.task = task;
             this.window = window;
+            window.onUpdate += Update;
             parentTask = task as ParentTask;
             capabilities -= Capabilities.Deletable;
             SetPosition(task.graphPosition);

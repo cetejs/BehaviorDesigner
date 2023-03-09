@@ -14,7 +14,7 @@ namespace BehaviorDesigner
         public string comment;
         [HideInInspector]
         public bool breakpoint;
-        public Action<TaskStatus> UpdateNotifyOnEditor { get; set; }
+        public Action<TaskStatus, bool> UpdateNotifyOnEditor { get; set; }
 #endif
         [HideInInspector]
         [SerializeField]
@@ -63,11 +63,11 @@ namespace BehaviorDesigner
         {
         }
 
-        public TaskStatus Update()
+        public TaskStatus Update(bool isAbortUpdate = false)
         {
             currentStatus = OnUpdate();
 #if UNITY_EDITOR
-            UpdateNotifyOnEditor?.Invoke(currentStatus);
+            UpdateNotifyOnEditor?.Invoke(currentStatus, isAbortUpdate);
 #endif
             return currentStatus;
         }
