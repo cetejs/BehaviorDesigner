@@ -13,16 +13,18 @@ namespace BehaviorDesigner
         {
             get { return abortType; }
         }
-
-        public void Restart()
+        
+        public virtual void RestartAbort()
         {
-            OnStart();
-            foreach (Task child in children)
+            currentChildIndex = abortChildIndex;
+            if (children[currentChildIndex] is Composite composite)
             {
-                if (!child.IsDisabled && child is Composite composite)
-                {
-                    composite.Restart();
-                }
+                lastChildIndex = currentChildIndex;
+                composite.RestartAbort();
+            }
+            else
+            {
+                lastChildIndex = currentChildIndex - 1;
             }
         }
 
@@ -34,6 +36,7 @@ namespace BehaviorDesigner
                 Task child = children[i];
                 if (UpdateAbort(child))
                 {
+                    abortChildIndex = i;
                     return true;
                 }
             }
@@ -41,7 +44,7 @@ namespace BehaviorDesigner
             return false;
         }
 
-        protected bool UpdateAbort(Task task)
+        protected virtual bool UpdateAbort(Task task)
         {
             if (task.IsDisabled)
             {

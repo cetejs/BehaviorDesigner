@@ -6,7 +6,8 @@ namespace BehaviorDesigner
     public abstract class ParentTask : Task
     {
         protected int lastChildIndex = -1;
-        protected int currentChildIndex = 0;
+        protected int currentChildIndex;
+        protected int abortChildIndex;
         protected List<Task> children = new List<Task>();
 
         public List<Task> Children

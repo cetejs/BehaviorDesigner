@@ -12,8 +12,8 @@
                 {
                     children[currentChildIndex].OnAbort();
                 }
-                
-                Restart();
+
+                RestartAbort();
             }
 
             while (CanExecute)

@@ -65,7 +65,7 @@ namespace BehaviorDesigner.Tasks
                     children[currentChildIndex].OnAbort();
                 }
 
-                Restart();
+                RestartAbort();
             }
 
             while (CanExecute)
@@ -100,6 +100,20 @@ namespace BehaviorDesigner.Tasks
             }
 
             return TaskStatus.Failure;
+        }
+
+        public override void RestartAbort()
+        {
+            currentChildIndex = abortChildIndex;
+            if (children[currentChildIndex] is Composite child)
+            {
+                lastChildIndex = currentChildIndex;
+                child.RestartAbort();
+            }
+            else
+            {
+                OnStart();
+            }
         }
 
         public override bool UpdateAbort()

@@ -40,7 +40,7 @@ namespace BehaviorDesigner.Tasks
                     }
                 }
 
-                Restart();
+                RestartAbort();
             }
 
             TaskStatus status = TaskStatus.Failure;
@@ -83,6 +83,29 @@ namespace BehaviorDesigner.Tasks
 
             isChildrenRunning = true;
             return status;
+        }
+
+        public override void RestartAbort()
+        {
+            if (children[abortChildIndex] is Composite child)
+            {
+                runningTasks.Insert(0, children[abortChildIndex]);
+                child.RestartAbort();
+            }
+            else
+            {
+                OnStart();
+            }
+        }
+
+        protected override bool UpdateAbort(Task task)
+        {
+            if (task is Composite && task.CurrentStatus != TaskStatus.Running)
+            {
+                return false;
+            }
+
+            return base.UpdateAbort(task);
         }
     }
 }
