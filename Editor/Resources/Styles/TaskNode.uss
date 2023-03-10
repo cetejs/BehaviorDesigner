@@ -87,7 +87,7 @@
     min-height: 40px;
 }
 
-#comment {
+#comment-label {
     font-size: 12px;
     -unity-text-align: middle-center;
     white-space: normal;
@@ -117,6 +117,16 @@ ConditionalNode #input {
 
 DecoratorNode #input {
     background-color: rgb(137, 166, 251);
+}
+
+UnknownNode #input {
+    background-color: rgb(255, 30, 30);
+    min-height: 20px;
+}
+
+UnknownParentNode #input {
+    background-color: rgb(255, 30, 30);
+    min-height: 20px;
 }
 
 #node-state {

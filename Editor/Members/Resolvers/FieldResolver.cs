@@ -33,6 +33,10 @@ namespace BehaviorDesigner.Editor
             this.window = window;
             editorField = CreateEditorField(fieldInfo);
             editorField.label = ObjectNames.NicifyVariableName(editorField.label);
+            if (this.fieldInfo.GetCustomAttribute<FieldReadOnlyAttribute>() != null)
+            {
+                editorField.SetEnabled(false);
+            }
         }
 
         public VisualElement EditorField

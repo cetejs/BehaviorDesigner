@@ -24,6 +24,14 @@ namespace BehaviorDesigner.Editor
             {
                 node = new RootNode();
             }
+            else if (typeof(UnknownTask).IsAssignableFrom(type))
+            {
+                node = new UnknownNode();
+            }
+            else if (typeof(UnknownParentTask).IsAssignableFrom(type))
+            {
+                node = new UnknownParentNode();
+            }
             else
             {
                 node = new ActionNode();

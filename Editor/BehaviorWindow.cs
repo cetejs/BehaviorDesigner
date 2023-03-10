@@ -51,7 +51,7 @@ namespace BehaviorDesigner.Editor
         }
 
         [RuntimeInitializeOnLoadMethod]
-        private static void EnterPlayerMode()
+        private static void EnterPlayMode()
         {
             if (HasOpenInstances<BehaviorWindow>())
             {

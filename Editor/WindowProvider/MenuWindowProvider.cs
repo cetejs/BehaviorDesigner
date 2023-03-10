@@ -4,19 +4,20 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace BehaviorDesigner.Editor
 {
-    public class MenuWindowProvider : ScriptableObject, ISearchWindowProvider
+    public abstract class MenuWindowProvider : ScriptableObject, ISearchWindowProvider
     {
         private static List<SearchTreeEntry> entries;
         private List<Type> taskTypes;
         private Dictionary<string, List<Type>> taskGroups;
-        private BehaviorWindow window;
+        protected BehaviorWindow window;
         private Texture2D taskIcon;
 
-        public void Init(BehaviorWindow window)
+        public virtual string Title { get; }
+
+        public virtual void Init(BehaviorWindow window)
         {
             this.window = window;
             taskIcon = Texture2D.blackTexture;
@@ -25,24 +26,11 @@ namespace BehaviorDesigner.Editor
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             CollectAllEntries();
+            entries[0].content.text = Title;
             return entries;
         }
 
-        public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
-        {
-            window.RegisterUndo("Add Task");
-            Type type = searchTreeEntry.userData as Type;
-            Task task = Activator.CreateInstance(type) as Task;
-            task.Id = window.Source.NewTaskId();
-            TaskNode node = window.CreateNode(task);
-            Vector2 worldMousePos = window.rootVisualElement.ChangeCoordinatesTo(window.rootVisualElement.parent, context.screenMousePosition - window.position.position);
-            Vector2 localMousePos = window.View.contentViewContainer.WorldToLocal(worldMousePos);
-            node.SetPosition(new Rect(localMousePos, new Vector2(100f, 100f)));
-            window.View.AddToSelection(node);
-            window.View.AddElement(node);
-            window.Save();
-            return true;
-        }
+        public abstract bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context);
 
         private void CollectAllEntries()
         { 
@@ -87,7 +75,7 @@ namespace BehaviorDesigner.Editor
                 }
             }
 
-            entries.Add(new SearchTreeGroupEntry(new GUIContent("Add Task")));
+            entries.Add(new SearchTreeGroupEntry(new GUIContent()));
             AddTaskGroup<Action>();
             AddTaskGroup<Composite>();
             AddTaskGroup<Conditional>();
@@ -121,7 +109,7 @@ namespace BehaviorDesigner.Editor
                             entries.Add(new SearchTreeGroupEntry(new GUIContent(category), 2));
                             hasGroup = true;
                         }
-                        
+
                         string title;
                         TaskNameAttribute attribute = type.GetCustomAttribute<TaskNameAttribute>();
                         if (attribute != null)

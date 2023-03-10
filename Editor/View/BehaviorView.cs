@@ -189,7 +189,7 @@ namespace BehaviorDesigner.Editor
 
         private void RegisterCreationRequest()
         {
-            MenuWindowProvider provider = ScriptableObject.CreateInstance<MenuWindowProvider>();
+            AddMenuWindowProvider provider = ScriptableObject.CreateInstance<AddMenuWindowProvider>();
             provider.Init(window);
             nodeCreationRequest += context =>
             {

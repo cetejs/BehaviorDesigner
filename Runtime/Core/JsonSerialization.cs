@@ -216,7 +216,28 @@ namespace BehaviorDesigner
         private int ReadTaskFormSerializedNodes(int index, out Task task)
         {
             SerializableNode node = serializableNodes[index];
-            Task newTask = (Task) JsonUtility.FromJson(node.task, BehaviorUtils.GetType(node.type));
+            Type type = BehaviorUtils.GetType(node.type);
+            Task newTask;
+            if (type == null)
+            {
+                if (node.childCount > 0)
+                {
+                    UnknownParentTask unknownParentTask = (UnknownParentTask) JsonUtility.FromJson(node.task, typeof(UnknownParentTask));
+                    unknownParentTask.unknownTaskType = node.type;
+                    newTask = unknownParentTask;
+                }
+                else
+                {
+                    UnknownTask unknownTask = (UnknownTask) JsonUtility.FromJson(node.task, typeof(UnknownTask));
+                    unknownTask.unknownTaskType = node.type;
+                    newTask = unknownTask;
+                }
+            }
+            else
+            {
+                newTask = (Task) JsonUtility.FromJson(node.task, type);
+            }
+
             ParentTask newParentTask = newTask as ParentTask;
             DeserializeObject(newTask);
             for (int i = 0; i < node.childCount; i++)

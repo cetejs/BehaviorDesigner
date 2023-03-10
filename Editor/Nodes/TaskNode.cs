@@ -14,13 +14,15 @@ namespace BehaviorDesigner.Editor
         protected TaskPort parentPort;
         protected ParentTaskNode parentNode;
         protected BehaviorWindow window;
-        private TextField nameInput;
-        private TextField commentInput;
-        private Label commentLabel;
+        protected TextField nameInput;
+        protected TextField commentInput;
+        protected Label commentLabel;
         private Rect position;
         private VisualElement breakpoint;
         private VisualElement statusIcon;
         private VisualElement nodeBorder;
+        private HashSet<GraphElement> elements;
+        private string statusIconName;
 
         private static readonly float ColorLerpSpeed = 2f;
         private static readonly Color DefaultColor = new Color(0.2f, 0.2f, 0.2f);
@@ -86,10 +88,15 @@ namespace BehaviorDesigner.Editor
             AddParent();
         }
 
-        public virtual void Replace(Task task)
+        public virtual void Replace(TaskNode newNode)
         {
-            this.task = task;
-            Restore();
+            if (parentPort.connected)
+            {
+                Edge edge = BehaviorUtils.ConnectPorts(parentNode.ChildPort, newNode.ParentPort);
+                window.View.AddElement(edge);
+            }
+            
+            newNode.SetPosition(position);
         }
 
         public virtual void Restore()
@@ -148,7 +155,7 @@ namespace BehaviorDesigner.Editor
             }
 
             UpdateDisableStatus();
-            OnTaskUpdate(task.CurrentStatus, true);
+            UpdateStatus(task.CurrentStatus, false);
             SetComment(task.comment);
             commentInput.value = task.comment;
             breakpoint.visible = task.breakpoint;
@@ -177,7 +184,7 @@ namespace BehaviorDesigner.Editor
             Restore();
             window.Save();
         }
-
+        
         public void OnGUI(VisualElement container)
         {
             container.Clear();
@@ -192,6 +199,22 @@ namespace BehaviorDesigner.Editor
             {
                 container.Add(priorityResolver.resolver.EditorField);
             }
+        }
+        
+        public IEnumerable<GraphElement> CollectElements()
+        {
+            if (elements == null)
+            {
+                elements = new HashSet<GraphElement>();
+            }
+            else
+            {
+                elements.Clear();
+            }
+
+            elements.Add(this);
+            CollectElements(elements, e => (e.capabilities & Capabilities.Deletable) == Capabilities.Deletable);
+            return elements;
         }
 
         public override void SetPosition(Rect newPos)
@@ -252,17 +275,22 @@ namespace BehaviorDesigner.Editor
 
         protected void OnTaskUpdate(TaskStatus status, bool isUpdateAbort)
         {
+            if (!isUpdateAbort && status != TaskStatus.Inactive)
+            {
+                nodeBorder.style.backgroundColor = RunningColor;
+            }
+
+            UpdateStatus(status, isUpdateAbort);
+        }
+
+        protected void UpdateStatus(TaskStatus status, bool isUpdateAbort)
+        {
             if (selected)
             {
                 foreach (PriorityResolver priorityResolver in priorityResolvers)
                 {
                     priorityResolver.resolver.Restore(task);
                 }
-            }
-
-            if (!isUpdateAbort && status != TaskStatus.Inactive)
-            {
-                nodeBorder.style.backgroundColor = RunningColor;
             }
 
             string iconName = null;
@@ -276,14 +304,18 @@ namespace BehaviorDesigner.Editor
                     break;
             }
 
-            if (!string.IsNullOrEmpty(iconName))
+            if (iconName != statusIconName)
             {
-                statusIcon.visible = true;
-                statusIcon.style.backgroundImage = BehaviorUtils.Load<Texture2D>($"Icons/{iconName}");
-            }
-            else
-            {
-                statusIcon.visible = false;
+                statusIconName = iconName;
+                if (!string.IsNullOrEmpty(iconName))
+                {
+                    statusIcon.visible = true;
+                    statusIcon.style.backgroundImage = BehaviorUtils.Load<Texture2D>($"Icons/{iconName}");
+                }
+                else
+                {
+                    statusIcon.visible = false;
+                }
             }
         }
 
@@ -312,7 +344,7 @@ namespace BehaviorDesigner.Editor
             nodeBorder.style.backgroundColor = Color.LerpUnclamped(color, DefaultColor, Time.deltaTime * ColorLerpSpeed);
         }
 
-        private void UpdateDisableStatus()
+        protected void UpdateDisableStatus()
         {
             if (task.IsDisabled)
             {
@@ -324,7 +356,7 @@ namespace BehaviorDesigner.Editor
             }
         }
 
-        private void AddParent()
+        protected void AddParent()
         {
             parentPort = TaskPort.Create<Edge>(Direction.Input, Port.Capacity.Single, typeof(Port));
             parentPort.portName = "";
@@ -341,7 +373,7 @@ namespace BehaviorDesigner.Editor
             };
         }
 
-        private void AddComment()
+        protected void AddComment()
         {
             commentInput.RegisterValueChangedCallback(evt =>
             {
@@ -352,7 +384,7 @@ namespace BehaviorDesigner.Editor
             });
         }
 
-        private void SetComment(string text)
+        protected void SetComment(string text)
         {
             commentLabel.text = text;
             if (string.IsNullOrEmpty(text))

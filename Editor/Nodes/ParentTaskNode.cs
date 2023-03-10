@@ -11,6 +11,11 @@ namespace BehaviorDesigner.Editor
         protected TaskPort childPort;
         protected readonly List<TaskNode> children = new List<TaskNode>();
 
+        public TaskPort ChildPort
+        {
+            get { return childPort; }
+        }
+
         public override void Init(Task task, BehaviorWindow window)
         {
             base.Init(task, window);
@@ -19,12 +24,20 @@ namespace BehaviorDesigner.Editor
             AddDoubleClickSelection();
         }
 
-        public override void Replace(Task task)
+        public override void Replace(TaskNode newNode)
         {
-            ParentTask lastParentTask = parentTask;
-            parentTask = task as ParentTask;
-            base.Replace(task);
-            parentTask.Children.AddRange(lastParentTask.Children);
+            base.Replace(newNode);
+            if (newNode is not ParentTaskNode newParentNode || !childPort.connected)
+            {
+                return;
+            }
+
+            ParentTask newParentTask = newParentNode.task as ParentTask;
+            for (int i = 0; i < children.Count && i < newParentTask.MaxChildren; i++)
+            {
+                Edge edge = BehaviorUtils.ConnectPorts(newParentNode.childPort, children[i].ParentPort);
+                window.View.AddElement(edge);
+            }
         }
 
         public override void Restore()
@@ -80,11 +93,6 @@ namespace BehaviorDesigner.Editor
             int i = 0;
             for (; i < children.Count; i++)
             {
-                if (node == children[i])
-                {
-                    continue;
-                }
-
                 if (node.GetPosition().x < children[i].GetPosition().x)
                 {
                     break;
@@ -102,6 +110,11 @@ namespace BehaviorDesigner.Editor
 
                 parentTask.Children.Insert(i, node.Task);
             }
+        }
+
+        public IEnumerable<TaskNode> GetChildren()
+        {
+            return children;
         }
 
         protected void AddDoubleClickSelection()
@@ -127,10 +140,8 @@ namespace BehaviorDesigner.Editor
                 {
                     children.Add(edge.input.node as TaskNode);
                 }
-                else
-                {
-                    UpdateChildIndex(edge.input.node as TaskNode);
-                }
+
+                UpdateChildIndex(edge.input.node as TaskNode);
 
                 if (!isManual)
                 {
