@@ -9,7 +9,7 @@ namespace BehaviorDesigner.Tasks
     public class ParallelSelector : Composite
     {
         private bool isChildrenRunning;
-        private readonly List<Task> runningTasks = new List<Task>();
+        private readonly List<bool> taskIsRunning = new List<bool>();
 
         public override bool CanRunParallelChildren
         {
@@ -20,8 +20,11 @@ namespace BehaviorDesigner.Tasks
         {
             base.OnStart();
             isChildrenRunning = false;
-            runningTasks.Clear();
-            runningTasks.AddRange(children);
+            taskIsRunning.Clear();
+            for (int i = 0; i < children.Count; i++)
+            {
+                taskIsRunning.Add(true);
+            }
         }
 
         public override TaskStatus OnUpdate()
@@ -30,9 +33,14 @@ namespace BehaviorDesigner.Tasks
             {
                 if (CanExecute)
                 {
-                    for (int i = 0; i < runningTasks.Count; i++)
+                    for (int i = 0; i < children.Count; i++)
                     {
-                        Task child = runningTasks[i];
+                        if (!taskIsRunning[i])
+                        {
+                            continue;
+                        }
+
+                        Task child = children[i];
                         if (!child.IsDisabled)
                         {
                             child.OnAbort();
@@ -45,9 +53,14 @@ namespace BehaviorDesigner.Tasks
 
             TaskStatus status = TaskStatus.Failure;
 
-            for (int i = 0; i < runningTasks.Count; i++)
+            for (int i = 0; i < children.Count; i++)
             {
-                Task child = runningTasks[i];
+                if (!taskIsRunning[i])
+                {
+                    continue;
+                }
+
+                Task child = children[i];
                 if (!child.IsDisabled)
                 {
                     if (!isChildrenRunning)
@@ -60,7 +73,7 @@ namespace BehaviorDesigner.Tasks
                     if (childStatus == TaskStatus.Failure)
                     {
                         child.OnEnd();
-                        runningTasks.RemoveAt(i--);
+                        taskIsRunning[i] = false;
                     }
                     else if (status != TaskStatus.Success)
                     {
@@ -71,9 +84,14 @@ namespace BehaviorDesigner.Tasks
 
             if (status == TaskStatus.Success)
             {
-                for (int i = 0; i < runningTasks.Count; i++)
+                for (int i = 0; i < children.Count; i++)
                 {
-                    Task child = runningTasks[i];
+                    if (!taskIsRunning[i])
+                    {
+                        continue;
+                    }
+
+                    Task child = children[i];
                     if (!child.IsDisabled)
                     {
                         child.OnEnd();
@@ -89,7 +107,7 @@ namespace BehaviorDesigner.Tasks
         {
             if (children[abortChildIndex] is Composite child)
             {
-                runningTasks.Insert(0, children[abortChildIndex]);
+                taskIsRunning[abortChildIndex] = true;
                 child.RestartAbort();
             }
             else
