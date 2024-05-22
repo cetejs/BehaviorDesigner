@@ -1,0 +1,13 @@
+{
+	"name": "com.cetejs.behaviordesigner",
+	"displayName": "Behavior Designer",
+	"description": "Behavior tree editor based on GraphView",
+	"version": "1.0.0",
+	"unity": "2021.3",
+	"license": "MIT",
+	"author" : {
+		"name": "Cetejs",
+		"email": "cetejs@gmail.com",
+		"url": "https://github.com/cetejs"
+	},
+}
