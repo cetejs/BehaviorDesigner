@@ -10,4 +10,16 @@
 		"email": "cetejs@gmail.com",
 		"url": "https://github.com/cetejs"
 	},
+	"samples": [
+		{
+			"displayName": "Basic",
+			"description": "Basic Sample",
+			"path": "Samples~/Basic"
+		},
+		{
+			"displayName": "Movement",
+			"description": "Movement Sample",
+			"path": "Samples~/Movement"
+		}
+	]
 }

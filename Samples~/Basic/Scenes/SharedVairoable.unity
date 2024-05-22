@@ -1,0 +1,1244 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &1162645771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1162645773}
+  - component: {fileID: 1162645772}
+  m_Layer: 0
+  m_Name: BehaviorTree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1162645772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162645771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eb425bab9748e88ea4b01a8c1daebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateType: 0
+  restartWhenComplete: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  source:
+    behaviorName: Behavior
+    behaviorDescription: 
+    serializedVersion: 102
+    root:
+      rid: 5920605342582177843
+    tasks:
+    - rid: 5920605342582177843
+    - rid: 5920605342582177845
+    - rid: 5920605342582177846
+    - rid: 5920605342582177847
+    - rid: 5920605342582177848
+    - rid: 5920605342582177849
+    - rid: 5920605342582177882
+    - rid: 5920605342582177883
+    - rid: 5920605342582177884
+    sharedVariables:
+    - rid: 5920605342582177857
+    - rid: 5920605342582177858
+    - rid: 5920605342582177859
+    - rid: 5920605342582177860
+    - rid: 5920605342582177861
+    - rid: 5920605342582177862
+    - rid: 5920605342582177863
+    - rid: 5920605342582177864
+    - rid: 5920605342582177865
+    - rid: 5920605342582177866
+    - rid: 5920605342582177867
+    - rid: 5920605342582177868
+    - rid: 5920605342582177869
+    - rid: 5920605342582177870
+    - rid: 5920605342582177871
+    - rid: 5920605342582177872
+    - rid: 5920605342582177873
+    - rid: 5920605342582177874
+    - rid: 5920605342582177875
+    - rid: 5920605342582177876
+    - rid: 5920605342582177877
+    - rid: 5920605342582177880
+    - rid: 5920605342582177881
+    - rid: 5920605633714061320
+  references:
+    version: 2
+    RefIds:
+    - rid: 5920605342582177843
+      type: {class: Root, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: Root
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 400
+          y: 300
+          width: 100
+          height: 100
+        guid: 764e256a031ef4640ac901754481be02
+        disabled: 0
+        breakpoint: 0
+        collapsed: 0
+        children:
+        - rid: 5920605342582177845
+    - rid: 5920605342582177845
+      type: {class: Sequence, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: Sequence
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 400
+          y: 488
+          width: 150
+          height: 130
+        guid: a56c4cc22c840f748a69a542b202260c
+        disabled: 0
+        breakpoint: 0
+        collapsed: 0
+        children:
+        - rid: 5920605342582177882
+        - rid: 5920605342582177846
+        - rid: 5920605342582177847
+        - rid: 5920605342582177884
+        - rid: 5920605342582177849
+        - rid: 5920605342582177883
+        - rid: 5920605342582177848
+        abortType: 0
+    - rid: 5920605342582177846
+      type: {class: SerializeFields, ns: , asm: Assembly-CSharp}
+      data:
+        name: Serialize Fields
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 41
+          y: 674
+          width: 150
+          height: 106
+        guid: f314de7f93eecd44090265855309e1ef
+        disabled: 0
+        breakpoint: 0
+        v101:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        v102: {fileID: 1162645772}
+        v103: 1
+        v104: {r: 1, g: 0, b: 0, a: 0}
+        v105: 105
+        v106: 106
+        v107: {fileID: 1162645771}
+        v108: 108
+        v109:
+          serializedVersion: 2
+          m_Bits: 2147483647
+        v110: 110
+        v111: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+        v112: {x: 0.008877192, y: 0.008572587, z: 0.017374935, w: 0.99977285}
+        v113:
+          serializedVersion: 2
+          x: 1
+          y: 1
+          width: 3
+          height: 0
+        v114: 114
+        v115: {fileID: 1162645773}
+        v116: {x: 11, y: 6}
+        v117: {x: 11, y: 7}
+        v118: {x: 1, y: 1, z: 8}
+        v119: {x: 1, y: 1, z: 9}
+        v120: {x: 1, y: 2, z: 0, w: 0}
+        v121:
+          value: Player
+        v201:
+        - serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        - serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        - serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 0
+        v202:
+        - {fileID: 1162645772}
+        - {fileID: 1386920506}
+        - {fileID: 1178851143}
+        v203: 010001
+        v204:
+        - {r: 1, g: 1, b: 1, a: 0}
+        - {r: 1, g: 0, b: 0, a: 0}
+        - {r: 0, g: 0, b: 0, a: 0}
+        v205:
+        - 2
+        - 0
+        - 5
+        v206:
+        - {fileID: 1162645771}
+        - {fileID: 1386920505}
+        - {fileID: 1178851141}
+        v207: 020000000000000007000000
+        v208:
+        - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+        v209:
+        - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+        v210:
+        - {x: 0.017452406, y: 0, z: 0, w: 0.9998477}
+        - {x: 0.008726536, y: 0, z: 0, w: 0.9999619}
+        - {x: 0.017452406, y: 0, z: 0, w: 0.9998477}
+        v211:
+        - 2
+        - 1
+        - 1
+        v212:
+        - {fileID: 1162645773}
+        - {fileID: 1386920507}
+        - {fileID: 1178851144}
+        v213:
+        - {x: 2, y: 2}
+        - {x: 1, y: 1}
+        - {x: 3, y: 3}
+        v214:
+        - {x: 2, y: 2, z: 2}
+        - {x: 1, y: 1, z: 1}
+        - {x: 4, y: 4, z: 4}
+        v215:
+        - {x: 2, y: 2, z: 2, w: 2}
+        - {x: 1, y: 1, z: 1, w: 1}
+        - {x: 5, y: 5, z: 5, w: 5}
+    - rid: 5920605342582177847
+      type: {class: Log, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: Log
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 221
+          y: 674
+          width: 150
+          height: 106
+        guid: 23ece88269ed88042b742521816ef833
+        disabled: 0
+        breakpoint: 0
+        logError:
+          name: 
+          isShared: 0
+          value: 0
+        logText:
+          name: 
+          isShared: 0
+          value: ------------------------------------------------- Get Shared Variables
+            -------------------------------------------------
+    - rid: 5920605342582177848
+      type: {class: GetSharedVariables, ns: , asm: Assembly-CSharp}
+      data:
+        name: Get Shared Variables
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 941
+          y: 674
+          width: 150
+          height: 106
+        guid: 05b5ac4214e8edd4795c51df2428c51c
+        disabled: 0
+        breakpoint: 0
+        v101:
+          name: v101
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        v102:
+          name: v102
+          isShared: 1
+          value: {fileID: 0}
+        v103:
+          name: v103
+          isShared: 1
+          value: 0
+        v104:
+          name: v104
+          isShared: 1
+          value: {r: 0, g: 0, b: 0, a: 0}
+        v105:
+          name: v105
+          isShared: 1
+          value: 0
+        v106:
+          name: v106
+          isShared: 1
+          value: 0
+        v107:
+          name: v107
+          isShared: 1
+          value: {fileID: 0}
+        v108:
+          name: v108
+          isShared: 1
+          value: 0
+        v109:
+          name: v109
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Bits: 0
+        v110:
+          name: v110
+          isShared: 1
+          value: 0
+        v111:
+          name: v111
+          isShared: 1
+          value: {fileID: 0}
+        v112:
+          name: v112
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 1}
+        v113:
+          name: v113
+          isShared: 1
+          value:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        v114:
+          name: v114
+          isShared: 1
+          value: 
+        v115:
+          name: v115
+          isShared: 1
+          value: {fileID: 0}
+        v116:
+          name: v116
+          isShared: 1
+          value: {x: 0, y: 0}
+        v117:
+          name: v117
+          isShared: 1
+          value: {x: 0, y: 0}
+        v118:
+          name: v118
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v119:
+          name: v119
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v120:
+          name: v120
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 0}
+        v121:
+          name: v121
+          isShared: 1
+          value:
+            value: 
+        v201:
+          name: v201
+          isShared: 1
+          value: []
+        v202:
+          name: v202
+          isShared: 1
+          value: []
+        v203:
+          name: v203
+          isShared: 1
+          value: []
+    - rid: 5920605342582177849
+      type: {class: SetSharedVariables, ns: , asm: Assembly-CSharp}
+      data:
+        name: Set Shared Variables
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 586
+          y: 674
+          width: 150
+          height: 106
+        guid: d0121588af096a04f87b67d34fb1dd83
+        disabled: 0
+        breakpoint: 0
+        v101:
+          name: v101
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        v102:
+          name: v102
+          isShared: 1
+          value: {fileID: 0}
+        v103:
+          name: v103
+          isShared: 1
+          value: 0
+        v104:
+          name: v104
+          isShared: 1
+          value: {r: 0, g: 0, b: 0, a: 0}
+        v105:
+          name: v105
+          isShared: 1
+          value: 0
+        v106:
+          name: v106
+          isShared: 1
+          value: 0
+        v107:
+          name: v107
+          isShared: 1
+          value: {fileID: 0}
+        v108:
+          name: v108
+          isShared: 1
+          value: 0
+        v109:
+          name: v109
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Bits: 0
+        v110:
+          name: v110
+          isShared: 1
+          value: 0
+        v111:
+          name: v111
+          isShared: 1
+          value: {fileID: 0}
+        v112:
+          name: v112
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 1}
+        v113:
+          name: v113
+          isShared: 1
+          value:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        v114:
+          name: v114
+          isShared: 1
+          value: 
+        v115:
+          name: v115
+          isShared: 1
+          value: {fileID: 0}
+        v116:
+          name: v116
+          isShared: 1
+          value: {x: 0, y: 0}
+        v117:
+          name: v117
+          isShared: 1
+          value: {x: 0, y: 0}
+        v118:
+          name: v118
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v119:
+          name: v119
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v120:
+          name: v120
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 0}
+        v121:
+          name: v121
+          isShared: 1
+          value:
+            value: Untagged
+        v201:
+          name: v201
+          isShared: 1
+          value: []
+        v202:
+          name: v202
+          isShared: 1
+          value: []
+        v203:
+          name: v203
+          isShared: 1
+          value: []
+    - rid: 5920605342582177857
+      type: {class: SharedAnimationCurve, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v101
+        isShared: 0
+        value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 5920605342582177858
+      type: {class: SharedBehaviour, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v102
+        isShared: 0
+        value: {fileID: 1162645772}
+    - rid: 5920605342582177859
+      type: {class: SharedBool, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v103
+        isShared: 0
+        value: 1
+    - rid: 5920605342582177860
+      type: {class: SharedColor, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v104
+        isShared: 0
+        value: {r: 1, g: 0, b: 0, a: 0}
+    - rid: 5920605342582177861
+      type: {class: SharedDouble, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v105
+        isShared: 0
+        value: 105
+    - rid: 5920605342582177862
+      type: {class: SharedFloat, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v106
+        isShared: 0
+        value: 106
+    - rid: 5920605342582177863
+      type: {class: SharedGameObject, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v107
+        isShared: 0
+        value: {fileID: 1162645771}
+    - rid: 5920605342582177864
+      type: {class: SharedInt, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v108
+        isShared: 0
+        value: 108
+    - rid: 5920605342582177865
+      type: {class: SharedLayerMask, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v109
+        isShared: 0
+        value:
+          serializedVersion: 2
+          m_Bits: 2147483647
+    - rid: 5920605342582177866
+      type: {class: SharedLong, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v110
+        isShared: 0
+        value: 110
+    - rid: 5920605342582177867
+      type: {class: SharedObject, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v111
+        isShared: 0
+        value: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - rid: 5920605342582177868
+      type: {class: SharedQuaternion, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v112
+        isShared: 0
+        value: {x: 0.008877213, y: 0.008572609, z: 0.017374935, w: 0.99977285}
+    - rid: 5920605342582177869
+      type: {class: SharedRect, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v113
+        isShared: 0
+        value:
+          serializedVersion: 2
+          x: 1
+          y: 1
+          width: 3
+          height: 0
+    - rid: 5920605342582177870
+      type: {class: SharedString, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v114
+        isShared: 0
+        value: 114
+    - rid: 5920605342582177871
+      type: {class: SharedTransform, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v115
+        isShared: 0
+        value: {fileID: 1162645773}
+    - rid: 5920605342582177872
+      type: {class: SharedVector2, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v116
+        isShared: 0
+        value: {x: 11, y: 6}
+    - rid: 5920605342582177873
+      type: {class: SharedVector2Int, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v117
+        isShared: 0
+        value: {x: 11, y: 7}
+    - rid: 5920605342582177874
+      type: {class: SharedVector3, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v118
+        isShared: 0
+        value: {x: 1, y: 1, z: 8}
+    - rid: 5920605342582177875
+      type: {class: SharedVector3Int, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v119
+        isShared: 0
+        value: {x: 1, y: 1, z: 9}
+    - rid: 5920605342582177876
+      type: {class: SharedVector4, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v120
+        isShared: 0
+        value: {x: 1, y: 2, z: 0, w: 0}
+    - rid: 5920605342582177877
+      type: {class: SharedGameObjectList, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v201
+        isShared: 0
+        value:
+        - {fileID: 1162645771}
+        - {fileID: 1386920505}
+        - {fileID: 1178851141}
+    - rid: 5920605342582177880
+      type: {class: SharedObjectList, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v202
+        isShared: 0
+        value:
+        - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+        - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - rid: 5920605342582177881
+      type: {class: SharedTransformList, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v203
+        isShared: 0
+        value:
+        - {fileID: 1162645773}
+        - {fileID: 1386920507}
+        - {fileID: 1178851144}
+    - rid: 5920605342582177882
+      type: {class: Log, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: Log
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: -141
+          y: 674
+          width: 150
+          height: 106
+        guid: 6927c673974abf94ea49042eb658d903
+        disabled: 0
+        breakpoint: 0
+        logError:
+          name: 
+          isShared: 0
+          value: 0
+        logText:
+          name: 
+          isShared: 0
+          value: ------------------------------------------------- Serialize Fields
+            -------------------------------------------------
+    - rid: 5920605342582177883
+      type: {class: Log, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: Log
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 768
+          y: 674
+          width: 150
+          height: 106
+        guid: c785fc78b9216dc4cabd5beda8a21b22
+        disabled: 0
+        breakpoint: 0
+        logError:
+          name: 
+          isShared: 0
+          value: 0
+        logText:
+          name: 
+          isShared: 0
+          value: ------------------------------------------------- Set Shared Variables
+            -------------------------------------------------
+    - rid: 5920605342582177884
+      type: {class: GetSharedVariables, ns: , asm: Assembly-CSharp}
+      data:
+        name: Get Shared Variables
+        comment: 
+        graphPosition:
+          serializedVersion: 2
+          x: 400
+          y: 674
+          width: 150
+          height: 106
+        guid: 949718211dc9d6848aa78c7ebe8086e9
+        disabled: 0
+        breakpoint: 0
+        v101:
+          name: v101
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Curve: []
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+        v102:
+          name: v102
+          isShared: 1
+          value: {fileID: 0}
+        v103:
+          name: v103
+          isShared: 1
+          value: 0
+        v104:
+          name: v104
+          isShared: 1
+          value: {r: 0, g: 0, b: 0, a: 0}
+        v105:
+          name: v105
+          isShared: 1
+          value: 0
+        v106:
+          name: v106
+          isShared: 1
+          value: 0
+        v107:
+          name: v107
+          isShared: 1
+          value: {fileID: 0}
+        v108:
+          name: v108
+          isShared: 1
+          value: 0
+        v109:
+          name: v109
+          isShared: 1
+          value:
+            serializedVersion: 2
+            m_Bits: 0
+        v110:
+          name: v110
+          isShared: 1
+          value: 0
+        v111:
+          name: v111
+          isShared: 1
+          value: {fileID: 0}
+        v112:
+          name: v112
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 1}
+        v113:
+          name: v113
+          isShared: 1
+          value:
+            serializedVersion: 2
+            x: 0
+            y: 0
+            width: 0
+            height: 0
+        v114:
+          name: v114
+          isShared: 1
+          value: 
+        v115:
+          name: v115
+          isShared: 1
+          value: {fileID: 0}
+        v116:
+          name: v116
+          isShared: 1
+          value: {x: 0, y: 0}
+        v117:
+          name: v117
+          isShared: 1
+          value: {x: 0, y: 0}
+        v118:
+          name: v118
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v119:
+          name: v119
+          isShared: 1
+          value: {x: 0, y: 0, z: 0}
+        v120:
+          name: v120
+          isShared: 1
+          value: {x: 0, y: 0, z: 0, w: 0}
+        v121:
+          name: v121
+          isShared: 1
+          value:
+            value: Untagged
+        v201:
+          name: v201
+          isShared: 1
+          value: []
+        v202:
+          name: v202
+          isShared: 1
+          value: []
+        v203:
+          name: v203
+          isShared: 1
+          value: []
+    - rid: 5920605633714061320
+      type: {class: SharedTag, ns: BehaviorDesigner, asm: BehaviorDesigner}
+      data:
+        name: v121
+        isShared: 0
+        value:
+          value: Untagged
+--- !u!4 &1162645773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162645771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1178851141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178851144}
+  - component: {fileID: 1178851143}
+  - component: {fileID: 1178851142}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &1178851142
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178851141}
+  m_Enabled: 1
+--- !u!20 &1178851143
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178851141}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1178851144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178851141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1386920505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386920507}
+  - component: {fileID: 1386920506}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1386920506
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386920505}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1386920507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386920505}
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
