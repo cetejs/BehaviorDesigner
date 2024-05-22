@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="node-state" />
+    <ui:VisualElement name="node-border">
+        <ui:VisualElement name="contents">
+            <ui:VisualElement name="top">
+                <ui:VisualElement name="input" />
+                <ui:VisualElement name="divider" class="vertical" />
+                <ui:VisualElement name="title">
+                    <ui:VisualElement name="icon" />
+                    <ui:Label name="title-label" text="SequencerNode" class="unity-text-element unity-label" />
+                </ui:VisualElement>
+                <ui:VisualElement name="divider" class="horizontal" />
+                <ui:VisualElement name="output" />
+                <ui:VisualElement name="collapse-btn" style="background-image: resource(&apos;Icons/TaskExpandIcon&apos;);" />
+                <ui:VisualElement name="disable-btn" style="background-image: resource(&apos;Icons/TaskExpandIcon&apos;);" />
+                <ui:VisualElement name="abort-type" />
+                <ui:VisualElement name="breakpoint" />
+                <ui:VisualElement name="status" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="selection-border" picking-mode="Ignore" />
+</ui:UXML>

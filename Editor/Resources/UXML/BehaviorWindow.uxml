@@ -1,0 +1,48 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <BehaviorDesigner.BehaviorToolBar>
+        <ui:Button text="&lt;" display-tooltip-when-elided="true" name="left-btn" style="width: 50px;" />
+        <ui:Button text="&gt;" display-tooltip-when-elided="true" name="right-btn" style="width: 50px;" />
+        <ui:DropdownField name="behavior-dp" />
+        <ui:Button text="Export" display-tooltip-when-elided="true" name="export-btn" />
+    </BehaviorDesigner.BehaviorToolBar>
+    <BehaviorDesigner.SplitView fixed-pane-initial-dimension="480" name="horizontal-splitview">
+        <ui:VisualElement name="left-panel" style="min-width: 100px;">
+            <BehaviorDesigner.SplitView orientation="Vertical" fixed-pane-initial-dimension="600" name="vertical-splitview">
+                <ui:VisualElement name="inspector-container" style="background-color: rgb(56, 56, 56); min-height: 100px;">
+                    <uie:Toolbar style="background-color: rgb(37, 37, 37); border-left-width: 5px; justify-content: space-between;">
+                        <ui:Label text="Inspector" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold;" />
+                        <uie:ToolbarMenu display-tooltip-when-elided="true" />
+                    </uie:Toolbar>
+                    <BehaviorDesigner.InspectorView style="top: 5px;">
+                        <ui:ScrollView horizontal-scroller-visibility="Hidden" />
+                    </BehaviorDesigner.InspectorView>
+                </ui:VisualElement>
+                <ui:VisualElement name="variables-container" style="background-color: rgb(56, 56, 56); min-height: 100px;">
+                    <uie:Toolbar style="background-color: rgb(37, 37, 37); border-left-width: 5px; justify-content: space-between;">
+                        <ui:Label text="Variables" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold;" />
+                    </uie:Toolbar>
+                    <BehaviorDesigner.VariablesView>
+                        <ui:VisualElement name="tool-field" style="flex-shrink: 0; display: none;">
+                            <ui:TextField picking-mode="Ignore" label="Name" name="name-input" />
+                            <ui:VisualElement style="flex-direction: row;">
+                                <ui:DropdownField label="Type" index="-1" name="type-dp" style="border-right-width: 45px; width: 100%;" />
+                                <ui:Button text="Add" display-tooltip-when-elided="true" name="add-btn" style="position: absolute; right: 0;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:ScrollView horizontal-scroller-visibility="Hidden" />
+                    </BehaviorDesigner.VariablesView>
+                </ui:VisualElement>
+            </BehaviorDesigner.SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="min-width: 100px;">
+            <BehaviorDesigner.BehaviorView focusable="true" style="flex-grow: 1;">
+                <BehaviorDesigner.BehaviorNameView picking-mode="Ignore" style="-unity-font-style: bold; font-size: 24px; border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px;">
+                    <ui:Label display-tooltip-when-elided="true" name="behavior-name" picking-mode="Ignore" />
+                </BehaviorDesigner.BehaviorNameView>
+                <BehaviorDesigner.DescriptionView picking-mode="Ignore" style="flex-grow: 1; flex-direction: column-reverse;">
+                    <ui:Label display-tooltip-when-elided="true" name="description" picking-mode="Ignore" style="visibility: hidden; white-space: normal; max-width: 400px; background-color: rgb(43, 43, 43); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; -unity-text-align: upper-center;" />
+                </BehaviorDesigner.DescriptionView>
+            </BehaviorDesigner.BehaviorView>
+        </ui:VisualElement>
+    </BehaviorDesigner.SplitView>
+</ui:UXML>
