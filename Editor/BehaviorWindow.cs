@@ -197,7 +197,7 @@ namespace BehaviorDesigner
             {
                 case PlayModeStateChange.EnteredPlayMode:
                 case PlayModeStateChange.EnteredEditMode:
-                    toolBar.ClearSelection();
+                    toolBar?.ClearSelection();
                     OnSelectionChange();
                     break;
             }
@@ -205,8 +205,11 @@ namespace BehaviorDesigner
 
         private void OnSceneOpened(Scene scene, OpenSceneMode mode)
         {
-            toolBar.ClearSelection();
-            toolBar.Refresh();
+            if (toolBar != null)
+            {
+                toolBar.ClearSelection();
+                toolBar.Refresh();
+            }
         }
 
         public void SetBehavior(IBehavior behavior)
